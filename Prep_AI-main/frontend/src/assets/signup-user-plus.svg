@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Create Account</title>
+  <desc id="desc">User icon with plus badge.</desc>
+  <g fill="none" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="24" cy="20" r="10" />
+    <path d="M10 52v-1.8c0-7.3 5.9-13.2 13.2-13.2h4.6c3.2 0 6.2 1.2 8.5 3.1" />
+    <circle cx="45.5" cy="44.5" r="10.5" />
+    <path d="M45.5 39.2v10.6M40.2 44.5h10.6" />
+  </g>
+</svg>
