@@ -402,11 +402,11 @@ function ReportPage() {
   return (
     <div className="home-shell app-shell">
       <nav className="home-navbar">
-        <a href="/" className="home-brand" aria-label="PrepAI Home">
+        <a href="/" className="home-brand" aria-label="NexaAura InterviewAI Home">
           <span className="brand-mark" aria-hidden="true">
             <span />
           </span>
-          <span className="brand-text">PrepAI</span>
+          <span className="brand-text">NexaAura InterviewAI</span>
         </a>
 
         <div className="home-menu">
@@ -414,6 +414,21 @@ function ReportPage() {
           <Link to="/resume">Resume</Link>
           <Link to="/interview">Interview</Link>
           <Link to="/report">Report</Link>
+          <a 
+            href="https://nexaaura-doc-hub.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              padding: '0.4rem 0.9rem',
+              borderRadius: '6px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}
+          >
+            📚 NexaDoc
+          </a>
         </div>
 
         <div className="nav-actions">

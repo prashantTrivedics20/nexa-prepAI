@@ -342,11 +342,11 @@ function Home() {
       </div>
 
       <nav className="home-navbar">
-        <a href="/" className="home-brand" aria-label="PrepAI Home">
+        <a href="/" className="home-brand" aria-label="NexaAura InterviewAI Home">
           <span className="brand-mark" aria-hidden="true">
             <span />
           </span>
-          <span className="brand-text">PrepAI</span>
+          <span className="brand-text">NexaAura InterviewAI</span>
         </a>
 
         <div className="home-menu">
@@ -373,12 +373,12 @@ function Home() {
         >
           <motion.div className="hero-copy home-fade-up" variants={revealUp}>
             <h1 className="hero-title">
-              AI Mock <strong>Job Interview</strong> <strong>Practice</strong> in English
+              Master Your Next <strong>Interview</strong> with <strong>AI</strong>
             </h1>
 
             <p className="hero-lead">
-              Get ready for your next interview with an AI coach that gives real-time
-              feedback on answers, grammar, fluency, and confidence.
+              Enterprise-grade AI interview preparation platform. Get real-time
+              feedback on answers, communication skills, and confidence. Built by NexaAura IT Solutions.
             </p>
 
             <div className="hero-actions">
@@ -387,7 +387,7 @@ function Home() {
                 onClick={() => navigate("/resume")}
                 className="hero-cta"
               >
-                Start a Free Mock Interview <span aria-hidden="true">-&gt;</span>
+                Start Your Free Practice Session <span aria-hidden="true">→</span>
               </button>
 
               <button
@@ -484,11 +484,11 @@ function Home() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="social-proof-shell home-fade-up">
-            <p className="social-proof-kicker">Social Proof</p>
-            <p className="social-proof-line">Trusted by 2,000+ students</p>
+            <p className="social-proof-kicker">Trusted by Professionals</p>
+            <p className="social-proof-line">Join 2,000+ successful candidates</p>
             <p className="social-proof-line social-proof-rating">
               <span className="rating-stars" aria-hidden="true">★★★★★</span>
-              <span>4.8/5 rating</span>
+              <span>4.8/5 rating | Powered by NexaAura IT</span>
             </p>
           </div>
         </motion.section>
@@ -501,7 +501,7 @@ function Home() {
           whileInView="show"
           viewport={revealViewport}
         >
-          <motion.h2 variants={revealUp}>How It Works</motion.h2>
+          <motion.h2 variants={revealUp}>How NexaAura InterviewAI Works</motion.h2>
           <div className="timeline-track">
             {timelineSteps.map((step, index) => (
               <motion.article key={step.title} className="timeline-step" variants={revealUp}>
@@ -539,7 +539,20 @@ function Home() {
         </motion.section>
       </main>
 
-      <footer className="home-footer">2026 PrepAI | AI Interview Practice Platform</footer>
+      <footer className="home-footer">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <p>© 2026 NexaAura InterviewAI | Built by <a href="https://www.nexaurait.online" target="_blank" rel="noopener noreferrer">NexaAura IT Solutions</a></p>
+          </div>
+          <div className="footer-contact">
+            <a href="mailto:nexaaurait@gmail.com">📧 nexaaurait@gmail.com</a>
+            <span>|</span>
+            <a href="tel:+917991666248">📞 +91 7991 666 248</a>
+            <span>|</span>
+            <a href="https://wa.me/917991666248" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

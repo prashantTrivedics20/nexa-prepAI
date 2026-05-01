@@ -548,17 +548,32 @@ function SignupPage() {
       <div className="signup-orb signup-orb-b" aria-hidden="true" />
 
       <nav className="home-navbar signup-navbar">
-        <a href="/" className="home-brand" aria-label="PrepAI Home">
+        <a href="/" className="home-brand" aria-label="NexaAura InterviewAI Home">
           <span className="brand-mark" aria-hidden="true">
             <span />
           </span>
-          <span className="brand-text">PrepAI</span>
+          <span className="brand-text">NexaAura InterviewAI</span>
         </a>
 
         <div className="home-menu">
           <Link to="/">Home</Link>
           <Link to="/resume">Practice</Link>
           <Link to="/report">Reports</Link>
+          <a 
+            href="https://nexaaura-doc-hub.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              padding: '0.4rem 0.9rem',
+              borderRadius: '6px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}
+          >
+            📚 NexaDoc
+          </a>
         </div>
 
         <div className="nav-actions">
@@ -576,11 +591,11 @@ function SignupPage() {
         >
           <div className="signup-form-side">
             <header className="signup-header">
-              <span className="signup-kicker">Join PrepAI</span>
+              <span className="signup-kicker">Join NexaAura InterviewAI</span>
               <h1>Create your account</h1>
               <p>
                 Build your interview profile, practice smarter, and track progress with AI
-                feedback.
+                feedback. Powered by NexaAura IT Solutions.
               </p>
             </header>
 

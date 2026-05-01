@@ -1252,11 +1252,11 @@ function InterviewPage() {
   return (
     <div className="home-shell app-shell">
       <nav className="home-navbar">
-        <a href="/" className="home-brand" aria-label="PrepAI Home">
+        <a href="/" className="home-brand" aria-label="NexaAura InterviewAI Home">
           <span className="brand-mark" aria-hidden="true">
             <span />
           </span>
-          <span className="brand-text">PrepAI</span>
+          <span className="brand-text">NexaAura InterviewAI</span>
         </a>
 
         <div className="home-menu">
@@ -1264,6 +1264,21 @@ function InterviewPage() {
           <Link to="/resume">Resume</Link>
           <Link to="/interview">Interview</Link>
           <Link to="/report">Report</Link>
+          <a 
+            href="https://nexaaura-doc-hub.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              padding: '0.4rem 0.9rem',
+              borderRadius: '6px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}
+          >
+            📚 NexaDoc
+          </a>
         </div>
 
         <div className="nav-actions">
@@ -1321,88 +1336,195 @@ function InterviewPage() {
 
         {!!parsedResume && (
           <motion.section
-            className="app-grid interview-layout home-fade-up"
+            className="interview-container-unique"
             variants={pageStagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
           >
-            <motion.article
-              className="glass-card"
+            {/* Left Sidebar - Controls */}
+            <motion.aside
+              className="interview-sidebar"
               variants={fadeUp}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <div className="title-row">
-                <h2>Session Controls</h2>
-                <span className="status-pill">
-                  {interviewId
-                    ? `Q${Math.max(questionNumber, 1)} / ${totalQuestions}`
-                    : "Not Started"}
-                </span>
+              <div className="sidebar-card">
+                <div className="sidebar-header">
+                  <div className="header-icon">⚙️</div>
+                  <div>
+                    <h2>Interview Setup</h2>
+                    <p className="sidebar-subtitle">Configure your practice session</p>
+                  </div>
+                </div>
+
+                {/* Progress Circle */}
+                <div className="progress-circle-container">
+                  <svg className="progress-circle" viewBox="0 0 120 120">
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="54"
+                      fill="none"
+                      stroke="rgba(59, 130, 246, 0.1)"
+                      strokeWidth="8"
+                    />
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="54"
+                      fill="none"
+                      stroke="url(#progressGradient)"
+                      strokeWidth="8"
+                      strokeLinecap="round"
+                      strokeDasharray={`${progressPercent * 3.39} 339`}
+                      transform="rotate(-90 60 60)"
+                    />
+                    <defs>
+                      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#3b82f6" />
+                        <stop offset="100%" stopColor="#8b5cf6" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="progress-text">
+                    <div className="progress-number">{answeredCount}</div>
+                    <div className="progress-label">of {totalQuestions}</div>
+                  </div>
+                </div>
+
+                {/* Domain Selection */}
+                <div className="control-group">
+                  <label className="control-label">
+                    <span className="label-icon">🎯</span>
+                    Interview Domain
+                  </label>
+                  <select
+                    className="control-select"
+                    value={selectedDomain}
+                    onChange={handleDomainChange}
+                    disabled={isStarting || isSubmitting || voiceUiBusy}
+                  >
+                    {INTERVIEW_DOMAINS.map((domain) => (
+                      <option key={domain} value={domain}>
+                        {domain}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Question Count */}
+                <div className="control-group">
+                  <label className="control-label">
+                    <span className="label-icon">📊</span>
+                    Number of Questions
+                  </label>
+                  <div className="number-input-wrapper">
+                    <button
+                      className="number-btn"
+                      onClick={() => setSelectedQuestionCount(Math.max(MIN_QUESTION_COUNT, selectedQuestionCount - 1))}
+                      disabled={isStarting || isSubmitting || voiceUiBusy || selectedQuestionCount <= MIN_QUESTION_COUNT}
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      className="control-number"
+                      min={MIN_QUESTION_COUNT}
+                      max={MAX_QUESTION_COUNT}
+                      value={selectedQuestionCount}
+                      onChange={(event) => {
+                        const rawValue = Number.parseInt(event.target.value, 10);
+                        const nextValue = Number.isFinite(rawValue)
+                          ? clamp(rawValue, MIN_QUESTION_COUNT, MAX_QUESTION_COUNT)
+                          : DEFAULT_QUESTION_COUNT;
+                        setSelectedQuestionCount(nextValue);
+                      }}
+                      disabled={isStarting || isSubmitting || voiceUiBusy}
+                    />
+                    <button
+                      className="number-btn"
+                      onClick={() => setSelectedQuestionCount(Math.min(MAX_QUESTION_COUNT, selectedQuestionCount + 1))}
+                      disabled={isStarting || isSubmitting || voiceUiBusy || selectedQuestionCount >= MAX_QUESTION_COUNT}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="sidebar-actions">
+                  <button 
+                    className="btn-start" 
+                    onClick={startInterview} 
+                    disabled={isStarting || isSubmitting || voiceUiBusy}
+                  >
+                    {isStarting ? (
+                      <>
+                        <span className="spinner-small"></span>
+                        Starting...
+                      </>
+                    ) : interviewId ? (
+                      <>
+                        <span>🔄</span>
+                        Restart Interview
+                      </>
+                    ) : (
+                      <>
+                        <span>🚀</span>
+                        Start Interview
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    className="btn-finish"
+                    onClick={finishInterview}
+                    disabled={!interviewId || !answeredCount || isFinishing || isSubmitting || voiceUiBusy}
+                  >
+                    {isFinishing ? (
+                      <>
+                        <span className="spinner-small"></span>
+                        Finishing...
+                      </>
+                    ) : (
+                      <>
+                        <span>✅</span>
+                        Finish & View Report
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Status Messages */}
+                {statusMessage && (
+                  <motion.div 
+                    className="status-message info"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                  >
+                    <span>ℹ️</span>
+                    {statusMessage}
+                  </motion.div>
+                )}
+                {error && (
+                  <motion.div 
+                    className="status-message error"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                  >
+                    <span>⚠️</span>
+                    {error}
+                  </motion.div>
+                )}
               </div>
+            </motion.aside>
 
-              <div className="progress-track">
-                <div style={{ width: `${progressPercent}%` }} />
-              </div>
-
-              <p className="muted-copy">
-                Answered {answeredCount} of {totalQuestions} questions.
-              </p>
-
-              <div className="domain-selector">
-                <label htmlFor="interview-domain">Domain</label>
-                <select
-                  id="interview-domain"
-                  value={selectedDomain}
-                  onChange={handleDomainChange}
-                  disabled={isStarting || isSubmitting || voiceUiBusy}
-                >
-                  {INTERVIEW_DOMAINS.map((domain) => (
-                    <option key={domain} value={domain}>
-                      {domain}
-                    </option>
-                  ))}
-                </select>
-                <p className="muted-copy domain-helper">
-                  Questions will be tailored to <strong>{selectedDomain}</strong>.
-                </p>
-
-                <label htmlFor="interview-question-count">Number of Questions</label>
-                <input
-                  id="interview-question-count"
-                  type="number"
-                  min={MIN_QUESTION_COUNT}
-                  max={MAX_QUESTION_COUNT}
-                  value={selectedQuestionCount}
-                  onChange={(event) => {
-                    const rawValue = Number.parseInt(event.target.value, 10);
-                    const nextValue = Number.isFinite(rawValue)
-                      ? clamp(rawValue, MIN_QUESTION_COUNT, MAX_QUESTION_COUNT)
-                      : DEFAULT_QUESTION_COUNT;
-                    setSelectedQuestionCount(nextValue);
-                  }}
-                  disabled={isStarting || isSubmitting || voiceUiBusy}
-                />
-                <p className="muted-copy domain-helper">
-                  Choose between {MIN_QUESTION_COUNT} and {MAX_QUESTION_COUNT} questions.
-                </p>
-              </div>
-
-              <div className="app-button-row">
-                <button type="button" className="app-btn" onClick={startInterview} disabled={isStarting || isSubmitting || voiceUiBusy}>
-                  {isStarting ? "Starting..." : interviewId ? "Restart Interview" : "Start Interview"}
-                </button>
-
-                <button
-                  type="button"
-                  className="app-btn secondary"
-                  onClick={finishInterview}
-                  disabled={!interviewId || !answeredCount || isFinishing || isSubmitting || voiceUiBusy}
-                >
-                  {isFinishing ? "Finishing..." : "Finish Interview"}
-                </button>
-              </div>
-
+            {/* Main Content Area */}
+            <motion.main
+              className="interview-main"
+              variants={fadeUp}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <AnimatePresence initial={false}>
                 {showQuestionSkeleton && (
                   <motion.div
@@ -1663,16 +1785,26 @@ function InterviewPage() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.article>
 
+            {/* Answer History Section */}
             <motion.article
-              className="glass-card"
+              className="glass-card history-card-unique"
               variants={fadeUp}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <h2>Answer History</h2>
+              <div className="card-header-enhanced">
+                <div className="icon-badge">📝</div>
+                <div>
+                  <h2>Answer History</h2>
+                  <p className="card-subtitle">Review your submitted responses</p>
+                </div>
+              </div>
               {!history.length && (
-                <p className="muted-copy">Submitted answers and scores will appear here.</p>
+                <div className="empty-state-box">
+                  <div className="empty-icon">📋</div>
+                  <p className="empty-title">No Answers Yet</p>
+                  <p className="empty-text">Submitted answers and scores will appear here</p>
+                </div>
               )}
 
               {!!history.length && (
@@ -1719,6 +1851,7 @@ function InterviewPage() {
                 </div>
               )}
             </motion.article>
+            </motion.main>
           </motion.section>
         )}
 

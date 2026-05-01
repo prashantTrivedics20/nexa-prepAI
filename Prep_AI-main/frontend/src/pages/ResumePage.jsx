@@ -311,11 +311,11 @@ function ResumePage() {
   return (
     <div className="home-shell app-shell">
       <nav className="home-navbar">
-        <a href="/" className="home-brand" aria-label="PrepAI Home">
+        <a href="/" className="home-brand" aria-label="NexaAura InterviewAI Home">
           <span className="brand-mark" aria-hidden="true">
             <span />
           </span>
-          <span className="brand-text">PrepAI</span>
+          <span className="brand-text">NexaAura InterviewAI</span>
         </a>
 
         <div className="home-menu">
@@ -323,6 +323,21 @@ function ResumePage() {
           <Link to="/resume">Resume</Link>
           <Link to="/interview">Interview</Link>
           <Link to="/report">Report</Link>
+          <a 
+            href="https://nexaaura-doc-hub.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              padding: '0.4rem 0.9rem',
+              borderRadius: '6px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}
+          >
+            📚 NexaDoc
+          </a>
         </div>
 
         <div className="nav-actions">
@@ -346,7 +361,7 @@ function ResumePage() {
           <p className="app-kicker">Step 1</p>
           <h1>Upload Your Resume</h1>
           <p>
-            Upload a PDF, let PrepAI parse your profile, then continue to your interview flow.
+            Upload a PDF, let NexaAura InterviewAI parse your profile, then continue to your interview flow.
           </p>
         </motion.section>
 
@@ -358,24 +373,69 @@ function ResumePage() {
           viewport={revealViewport}
         >
           <motion.article className="glass-card" variants={revealUp}>
-            <h2>Resume File</h2>
-            <p className="muted-copy">
-              Use a clean PDF format for best extraction quality. A new upload replaces previous data.
-            </p>
-
-            <label className="app-file-picker" htmlFor="resume-file">
-              <span>{file ? file.name : "Choose a PDF resume"}</span>
-              <input id="resume-file" type="file" accept=".pdf,application/pdf" onChange={handleFileSelect} />
-            </label>
+            <div className="card-header-enhanced">
+              <div className="icon-badge">📄</div>
+              <div>
+                <h2>Resume File</h2>
+                <p className="card-subtitle">Upload your PDF resume for AI analysis</p>
+              </div>
+            </div>
+            
+            <div className="upload-zone">
+              <label className="app-file-picker enhanced-file-picker" htmlFor="resume-file">
+                <div className="file-picker-icon">
+                  {file ? '✓' : '📤'}
+                </div>
+                <div className="file-picker-content">
+                  <span className="file-picker-title">
+                    {file ? file.name : "Choose a PDF resume"}
+                  </span>
+                  <span className="file-picker-hint">
+                    {file ? 'Click to change file' : 'Click to browse or drag & drop'}
+                  </span>
+                </div>
+                <input id="resume-file" type="file" accept=".pdf,application/pdf" onChange={handleFileSelect} />
+              </label>
+            </div>
 
             <div className="app-button-row">
-              <button type="button" className="app-btn" onClick={handleUpload} disabled={uploading}>
-                {uploading ? "Uploading..." : "Upload Resume"}
+              <button 
+                type="button" 
+                className="app-btn primary-gradient" 
+                onClick={handleUpload} 
+                disabled={uploading || !file}
+                style={{
+                  background: uploading ? '#94a3b8' : 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                  opacity: (!file && !uploading) ? 0.6 : 1
+                }}
+              >
+                {uploading ? (
+                  <>
+                    <span className="spinner-small"></span>
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <span>📤</span>
+                    Upload Resume
+                  </>
+                )}
               </button>
-              <button type="button" className="app-btn secondary" onClick={goToInterviewWithAuthCheck} disabled={!parsedResume}>
-                Continue
+              <button 
+                type="button" 
+                className="app-btn secondary" 
+                onClick={goToInterviewWithAuthCheck} 
+                disabled={!parsedResume}
+                style={{ opacity: !parsedResume ? 0.6 : 1 }}
+              >
+                <span>🚀</span>
+                Continue to Interview
               </button>
+            </div>
+
+            <div className="app-button-row" style={{ marginTop: '0.5rem' }}>
               <button type="button" className="app-btn ghost" onClick={handleReset}>
+                <span>🔄</span>
                 Reset
               </button>
               {isLoggedIn ? (
@@ -385,34 +445,102 @@ function ResumePage() {
                   onClick={handleDeleteSavedResume}
                   disabled={deletingSavedResume}
                 >
-                  {deletingSavedResume ? "Deleting..." : "Delete Saved Resume"}
+                  {deletingSavedResume ? (
+                    <>
+                      <span className="spinner-small"></span>
+                      Deleting...
+                    </>
+                  ) : (
+                    <>
+                      <span>🗑️</span>
+                      Delete Saved Resume
+                    </>
+                  )}
                 </button>
               ) : null}
             </div>
 
-            {error && <p className="app-alert error">{error}</p>}
-            {success && <p className="app-alert success">{success}</p>}
+            {error && (
+              <motion.div 
+                className="app-alert error"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <span>⚠️</span>
+                {error}
+              </motion.div>
+            )}
+            {success && (
+              <motion.div 
+                className="app-alert success"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <span>✅</span>
+                {success}
+              </motion.div>
+            )}
           </motion.article>
 
           <motion.article className="glass-card" variants={revealUp}>
-            <h2>Parsed Resume Preview</h2>
-            {!parsedResume && <p className="muted-copy">No parsed resume found yet. Upload a file to see extracted details.</p>}
+            <div className="card-header-enhanced">
+              <div className="icon-badge">👁️</div>
+              <div>
+                <h2>Parsed Resume Preview</h2>
+                <p className="card-subtitle">AI-extracted information from your resume</p>
+              </div>
+            </div>
+
+            {!parsedResume && (
+              <div className="empty-state-box">
+                <div className="empty-icon">📋</div>
+                <p className="empty-title">No Resume Parsed Yet</p>
+                <p className="empty-text">Upload a PDF file to see extracted details here</p>
+              </div>
+            )}
 
             {parsedResume?.rawText && (
-              <pre className="app-previewer">{parsedResume.rawText}</pre>
+              <div className="preview-section">
+                <div className="preview-header">
+                  <span className="preview-badge">Raw Text</span>
+                </div>
+                <pre className="app-previewer">{parsedResume.rawText}</pre>
+              </div>
             )}
 
             {!!parsedSections.length && (
               <div className="resume-preview-list">
-                {parsedSections.map((section) => (
-                  <div key={section.title} className="resume-preview-section">
-                    <h3>{section.title}</h3>
+                {parsedSections.map((section, idx) => (
+                  <motion.div 
+                    key={section.title} 
+                    className="resume-preview-section"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <div className="section-header-enhanced">
+                      <span className="section-icon">
+                        {section.title === 'Skills' ? '🎯' : 
+                         section.title === 'Projects' ? '💼' :
+                         section.title === 'Experience' ? '🏢' : '🎓'}
+                      </span>
+                      <h3>{section.title}</h3>
+                      <span className="item-count">{section.items.length} items</span>
+                    </div>
                     <ul>
                       {section.items.map((item, index) => (
-                        <li key={`${section.title}-${index}`}>{item}</li>
+                        <motion.li 
+                          key={`${section.title}-${index}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: idx * 0.1 + index * 0.05 }}
+                        >
+                          <span className="bullet">•</span>
+                          {item}
+                        </motion.li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}

@@ -1,7 +1,11 @@
 {
-  "name": "frontend",
+  "name": "nexaura-interviewai-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "NexaAura InterviewAI - AI-Powered Interview Preparation Platform",
+  "author": "Prashant Kumar Trivedi <nexaaurait@gmail.com>",
+  "company": "NexaAura IT Solutions",
+  "website": "https://www.nexaurait.online",
   "type": "module",
   "scripts": {
     "dev": "vite",

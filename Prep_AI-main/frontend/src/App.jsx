@@ -1,6 +1,9 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import EnhancedHome from "./pages/EnhancedHome";
+import Toast from "./components/Toast";
+import "./components/components.css";
+import "./styles/enhanced-home.css";
 
 const ResumePage = lazy(() => import("./pages/ResumePage"));
 const InterviewPage = lazy(() => import("./pages/Interview"));
@@ -46,15 +49,18 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<RouteLoadingFallback />}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/resume" element={<ResumePage />} />
-        <Route path="/interview" element={<InterviewPage />} />
-        <Route path="/report" element={<ReportPage />} />
-      </Routes>
-    </Suspense>
+    <>
+      <Toast />
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<EnhancedHome />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/interview" element={<InterviewPage />} />
+          <Route path="/report" element={<ReportPage />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 
