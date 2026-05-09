@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import API from '../services/api';
 import { isAuthenticated } from '../services/auth';
 import './VoiceAIAssistant.css';
@@ -12,9 +14,10 @@ function VoiceAIAssistant() {
   const [conversationHistory, setConversationHistory] = useState([]);
   const [error, setError] = useState('');
   const [sessionId] = useState(() => `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`);
-  const [mode, setMode] = useState('communication-practice');
+  const [mode, setMode] = useState('general');
   const [currentAnalysis, setCurrentAnalysis] = useState(null);
   const [showAnalysis, setShowAnalysis] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState(null);
   
   const recognitionRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
@@ -238,6 +241,92 @@ function VoiceAIAssistant() {
     return descriptions[mode] || descriptions['general'];
   };
 
+  // Parse message content to extract code blocks and format text
+  const parseMessageContent = (content) => {
+    const parts = [];
+    let currentIndex = 0;
+    
+    // Regex to match code blocks: ```language\ncode\n```
+    const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
+    let match;
+    
+    while ((match = codeBlockRegex.exec(content)) !== null) {
+      // Add text before code block
+      if (match.index > currentIndex) {
+        const textBefore = content.substring(currentIndex, match.index);
+        if (textBefore.trim()) {
+          parts.push({ type: 'text', content: textBefore });
+        }
+      }
+      
+      // Add code block - use detected language or 'text' as fallback
+      const language = match[1] || 'text';
+      const code = match[2].trim();
+      parts.push({ type: 'code', language, content: code });
+      
+      currentIndex = match.index + match[0].length;
+    }
+    
+    // Add remaining text
+    if (currentIndex < content.length) {
+      const remainingText = content.substring(currentIndex);
+      if (remainingText.trim()) {
+        parts.push({ type: 'text', content: remainingText });
+      }
+    }
+    
+    // If no code blocks found, return as single text part
+    if (parts.length === 0) {
+      parts.push({ type: 'text', content });
+    }
+    
+    return parts;
+  };
+
+  // Format text content (bold, lists, etc.)
+  const formatTextContent = (text) => {
+    // Split by newlines to handle lists and paragraphs
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    return lines.map((line, idx) => {
+      // Handle bullet points
+      if (line.trim().startsWith('- ') || line.trim().startsWith('• ')) {
+        return (
+          <li key={idx} className="voice-ai-list-item">
+            {line.replace(/^[-•]\s*/, '')}
+          </li>
+        );
+      }
+      
+      // Handle numbered lists
+      if (/^\d+\.\s/.test(line.trim())) {
+        return (
+          <li key={idx} className="voice-ai-list-item">
+            {line.replace(/^\d+\.\s*/, '')}
+          </li>
+        );
+      }
+      
+      // Handle bold text **text**
+      const boldFormatted = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      
+      // Handle inline code `code`
+      const codeFormatted = boldFormatted.replace(/`([^`]+)`/g, '<code class="voice-ai-inline-code">$1</code>');
+      
+      return (
+        <p key={idx} className="voice-ai-text-line" dangerouslySetInnerHTML={{ __html: codeFormatted }} />
+      );
+    });
+  };
+
+  // Copy code to clipboard
+  const copyToClipboard = (text, index) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    });
+  };
+
   return (
     <>
       {/* Floating Button */}
@@ -272,9 +361,9 @@ function VoiceAIAssistant() {
               <div className="voice-ai-title">
                 <span className="voice-ai-avatar">🤖</span>
                 <div>
-                  <h3>Voice AI Assistant</h3>
+                  <h3>AI Voice Assistant</h3>
                   <p className="voice-ai-subtitle">
-                    {isListening ? 'Listening...' : isSpeaking ? 'Speaking...' : 'Ready to help'}
+                    {isListening ? 'Listening...' : isSpeaking ? 'Speaking...' : 'Ask me anything!'}
                   </p>
                 </div>
               </div>
@@ -285,6 +374,21 @@ function VoiceAIAssistant() {
               >
                 ✕
               </button>
+            </div>
+
+            {/* Mode Selector */}
+            <div className="voice-ai-mode-selector">
+              <select 
+                value={mode} 
+                onChange={(e) => setMode(e.target.value)}
+                className="voice-ai-mode-select"
+                disabled={isListening || isSpeaking}
+              >
+                <option value="general">💬 General Chat (Ask Anything)</option>
+                <option value="communication-practice">🗣️ Communication Practice</option>
+                <option value="interview-practice">💼 Interview Practice</option>
+                <option value="grammar-focus">📝 Grammar Focus</option>
+              </select>
             </div>
 
             {/* Conversation History */}
@@ -302,24 +406,74 @@ function VoiceAIAssistant() {
                       : 'Starting conversation...'}
                   </p>
                   <p className="voice-ai-hint">
-                    Practice English, communication skills, or interview questions!
+                    {mode === 'general' 
+                      ? 'Ask me anything - coding, tech, general knowledge, advice, explanations!'
+                      : mode === 'communication-practice'
+                      ? 'Practice English conversation and communication skills!'
+                      : mode === 'interview-practice'
+                      ? 'Practice interview questions and get feedback!'
+                      : 'Practice grammar and improve your English!'}
                   </p>
                 </div>
               ) : (
                 <>
-                  {conversationHistory.map((msg, idx) => (
-                    <div
-                      key={idx}
-                      className={`voice-ai-message ${msg.role}`}
-                    >
-                      <div className="voice-ai-message-avatar">
-                        {msg.role === 'user' ? '👤' : '🤖'}
+                  {conversationHistory.map((msg, idx) => {
+                    const messageParts = msg.role === 'assistant' ? parseMessageContent(msg.content) : null;
+                    
+                    return (
+                      <div
+                        key={idx}
+                        className={`voice-ai-message ${msg.role}`}
+                      >
+                        <div className="voice-ai-message-avatar">
+                          {msg.role === 'user' ? '👤' : '🤖'}
+                        </div>
+                        <div className="voice-ai-message-content">
+                          {msg.role === 'user' ? (
+                            msg.content
+                          ) : (
+                            <div className="voice-ai-formatted-content">
+                              {messageParts.map((part, partIdx) => {
+                                if (part.type === 'code') {
+                                  return (
+                                    <div key={partIdx} className="voice-ai-code-block">
+                                      <div className="voice-ai-code-header">
+                                        <span className="voice-ai-code-language">{part.language}</span>
+                                        <button
+                                          className="voice-ai-copy-btn"
+                                          onClick={() => copyToClipboard(part.content, `${idx}-${partIdx}`)}
+                                          title="Copy code"
+                                        >
+                                          {copiedIndex === `${idx}-${partIdx}` ? '✓ Copied!' : '📋 Copy'}
+                                        </button>
+                                      </div>
+                                      <SyntaxHighlighter
+                                        language={part.language}
+                                        style={vscDarkPlus}
+                                        customStyle={{
+                                          margin: 0,
+                                          borderRadius: '0 0 8px 8px',
+                                          fontSize: '0.875rem'
+                                        }}
+                                      >
+                                        {part.content}
+                                      </SyntaxHighlighter>
+                                    </div>
+                                  );
+                                } else {
+                                  return (
+                                    <div key={partIdx} className="voice-ai-text-content">
+                                      {formatTextContent(part.content)}
+                                    </div>
+                                  );
+                                }
+                              })}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="voice-ai-message-content">
-                        {msg.content}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                   <div ref={conversationEndRef} />
                 </>
               )}
@@ -407,10 +561,35 @@ function VoiceAIAssistant() {
             <div className="voice-ai-tips">
               <p><strong>💡 Tips:</strong></p>
               <ul>
-                <li>Speak clearly and naturally</li>
-                <li>Practice English conversation</li>
-                <li>Ask for interview tips</li>
-                <li>Get help with coding questions</li>
+                {mode === 'general' ? (
+                  <>
+                    <li>Ask about coding, tech, or any topic</li>
+                    <li>Get explanations and solutions</li>
+                    <li>Request examples and tutorials</li>
+                    <li>Ask for advice and recommendations</li>
+                  </>
+                ) : mode === 'communication-practice' ? (
+                  <>
+                    <li>Speak clearly and naturally</li>
+                    <li>Practice English conversation</li>
+                    <li>Get grammar corrections</li>
+                    <li>Improve communication skills</li>
+                  </>
+                ) : mode === 'interview-practice' ? (
+                  <>
+                    <li>Practice interview answers</li>
+                    <li>Get professional feedback</li>
+                    <li>Build confidence</li>
+                    <li>Improve delivery</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Focus on grammar rules</li>
+                    <li>Get corrections explained</li>
+                    <li>Practice proper usage</li>
+                    <li>Improve accuracy</li>
+                  </>
+                )}
               </ul>
             </div>
           </motion.div>

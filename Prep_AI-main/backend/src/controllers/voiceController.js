@@ -61,7 +61,8 @@ exports.voiceChat = async (req, res) => {
     const aiResponse = await voiceChat(
       message,
       systemContext,
-      conversation.messages
+      conversation.messages,
+      mode
     );
 
     // Add AI message
@@ -372,7 +373,13 @@ function buildAIContext(conversation, mode) {
   const isFirstMessage = messageCount === 0;
 
   const contexts = {
-    'general': 'You are a helpful AI assistant. Keep responses concise and natural.',
+    'general': isFirstMessage
+      ? `You are a helpful AI assistant like ChatGPT. The user will ask you questions about anything - technical topics, coding, general knowledge, advice, explanations, etc.
+Answer their questions directly and helpfully. Keep responses conversational and under 3 sentences.
+If they just say "hello" or greet you, greet them back and ask "What would you like to know?" or "How can I help you?"`
+      : `You are a helpful AI assistant like ChatGPT. Answer the user's question directly and clearly.
+Keep responses under 3 sentences. Be conversational and helpful.
+If they ask a question, answer it. If they make a statement, respond naturally and ask if they need anything else.`,
     
     'communication-practice': isFirstMessage 
       ? `You are a communication coach. Your FIRST message must be ONLY a question. No introduction, no explanation.

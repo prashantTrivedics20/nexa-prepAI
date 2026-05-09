@@ -342,24 +342,39 @@ Be professional yet friendly and encouraging.
   };
 };
 
-exports.voiceChat = async (userMessage, systemContext, conversationHistory = []) => {
+exports.voiceChat = async (userMessage, systemContext, conversationHistory = [], mode = 'general') => {
   // Build conversation history for context
   const recentHistory = conversationHistory.slice(-6); // Last 3 exchanges
   const historyText = recentHistory.length > 0
     ? recentHistory.map(msg => `${msg.role === 'user' ? 'User' : 'AI'}: ${msg.content}`).join('\n')
     : '';
 
+  // Add formatting instructions for code responses
+  const formattingInstructions = mode === 'general' 
+    ? `\n\nIMPORTANT FORMATTING RULES:
+- For code examples, ALWAYS specify the language in code blocks: \`\`\`python\ncode\n\`\`\` or \`\`\`javascript\ncode\n\`\`\`
+- Supported languages: python, javascript, java, cpp, c, csharp, go, rust, typescript, html, css, sql, bash, etc.
+- NEVER use generic \`\`\` without language - always specify: \`\`\`python or \`\`\`javascript
+- Use **bold** for emphasis
+- Use bullet points with - for lists
+- Keep responses clear and structured
+- For multi-step explanations, use numbered lists`
+    : '';
+
   const prompt = `
-${systemContext}
+${systemContext}${formattingInstructions}
 
 ${historyText ? `Recent conversation:\n${historyText}\n` : ''}
 User: ${userMessage}
 
 AI:`;
 
+  // Adjust max tokens based on mode
+  const maxTokens = mode === 'general' ? 400 : 150; // More tokens for general questions with code
+
   const response = await callGrok(prompt, {
     temperature: 0.7,
-    maxTokens: 150, // Keep responses short
+    maxTokens: maxTokens,
   });
 
   return response.trim();
