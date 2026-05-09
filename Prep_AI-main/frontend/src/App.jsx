@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import EnhancedHome from "./pages/EnhancedHome";
 import Toast from "./components/Toast";
 import GlobalAIChatbot from "./components/GlobalAIChatbot";
+import VoiceAIAssistant from "./components/VoiceAIAssistant";
 import "./components/components.css";
 import "./styles/enhanced-home.css";
 
@@ -61,6 +62,7 @@ function App() {
     <>
       <Toast />
       <GlobalAIChatbot />
+      <VoiceAIAssistant />
       <Suspense fallback={<RouteLoadingFallback />}>
         <Routes>
           <Route path="/" element={<EnhancedHome />} />

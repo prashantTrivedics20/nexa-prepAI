@@ -341,3 +341,26 @@ Be professional yet friendly and encouraging.
     timestamp: new Date().toISOString()
   };
 };
+
+exports.voiceChat = async (userMessage, systemContext, conversationHistory = []) => {
+  // Build conversation history for context
+  const recentHistory = conversationHistory.slice(-6); // Last 3 exchanges
+  const historyText = recentHistory.length > 0
+    ? recentHistory.map(msg => `${msg.role === 'user' ? 'User' : 'AI'}: ${msg.content}`).join('\n')
+    : '';
+
+  const prompt = `
+${systemContext}
+
+${historyText ? `Recent conversation:\n${historyText}\n` : ''}
+User: ${userMessage}
+
+AI:`;
+
+  const response = await callGrok(prompt, {
+    temperature: 0.7,
+    maxTokens: 150, // Keep responses short
+  });
+
+  return response.trim();
+};
