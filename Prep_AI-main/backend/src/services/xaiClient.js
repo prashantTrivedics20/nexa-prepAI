@@ -147,31 +147,85 @@ async function requestChatCompletion({
   temperature = 0.2,
   maxTokens,
   timeoutMs = DEFAULT_TIMEOUT_MS,
+  stream = false,
+  onChunk = null,
 }) {
   const payload = {
     model,
     messages,
     temperature,
+    stream,
   };
 
   if (Number.isFinite(Number(maxTokens)) && Number(maxTokens) > 0) {
     payload.max_tokens = Math.floor(Number(maxTokens));
   }
 
-  const response = await xaiHttpClient.post(`${apiBase}/chat/completions`, payload, {
-    timeout: timeoutMs,
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-  });
+  if (stream && onChunk) {
+    // Streaming mode
+    const response = await xaiHttpClient.post(`${apiBase}/chat/completions`, payload, {
+      timeout: timeoutMs,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      responseType: 'stream',
+    });
 
-  const text = extractResponseText(response.data);
-  if (!text) {
-    throw new Error("xAI response did not contain text output.");
+    return new Promise((resolve, reject) => {
+      let fullText = '';
+      
+      response.data.on('data', (chunk) => {
+        const lines = chunk.toString().split('\n').filter(line => line.trim() !== '');
+        
+        for (const line of lines) {
+          if (line.includes('[DONE]')) {
+            resolve(fullText);
+            return;
+          }
+          
+          if (line.startsWith('data: ')) {
+            try {
+              const jsonStr = line.slice(6);
+              const data = JSON.parse(jsonStr);
+              const content = data?.choices?.[0]?.delta?.content;
+              
+              if (content) {
+                fullText += content;
+                onChunk(content);
+              }
+            } catch (e) {
+              // Skip invalid JSON
+            }
+          }
+        }
+      });
+
+      response.data.on('end', () => {
+        resolve(fullText);
+      });
+
+      response.data.on('error', (error) => {
+        reject(error);
+      });
+    });
+  } else {
+    // Non-streaming mode (original behavior)
+    const response = await xaiHttpClient.post(`${apiBase}/chat/completions`, payload, {
+      timeout: timeoutMs,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const text = extractResponseText(response.data);
+    if (!text) {
+      throw new Error("xAI response did not contain text output.");
+    }
+
+    return text;
   }
-
-  return text;
 }
 
 async function chatCompletionWithFallback({
@@ -181,6 +235,8 @@ async function chatCompletionWithFallback({
   temperature = 0.2,
   maxTokens,
   timeoutMs = DEFAULT_TIMEOUT_MS,
+  stream = false,
+  onChunk = null,
 }) {
   const apiKey = getApiKey();
   if (!apiKey) {
@@ -202,6 +258,8 @@ async function chatCompletionWithFallback({
         temperature,
         maxTokens,
         timeoutMs,
+        stream,
+        onChunk,
       });
     } catch (error) {
       const errorDetails = getApiErrorDetails(error);

@@ -316,3 +316,61 @@ exports.finishInterview = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Get user's interview history
+exports.getInterviewHistory = async (req, res) => {
+  try {
+    const userId = req.user?.userId || req.user?._id;
+    if (!userId) {
+      return res.status(401).json({ error: "Authentication required." });
+    }
+
+    const { page = 1, limit = 20 } = req.query;
+    const skip = (page - 1) * limit;
+
+    const interviews = await Interview.find({ 
+      user: userId,
+      finalScore: { $exists: true } // Only completed interviews
+    })
+      .select('domain finalScore finalFeedback responses questions createdAt updatedAt')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parseInt(limit))
+      .lean();
+
+    const total = await Interview.countDocuments({ 
+      user: userId,
+      finalScore: { $exists: true }
+    });
+
+    // Format interviews for frontend
+    const formattedInterviews = interviews.map(interview => ({
+      interviewId: interview._id,
+      domain: interview.domain || 'General',
+      finalScore: interview.finalScore || 0,
+      feedback: interview.finalFeedback || '',
+      answeredQuestions: interview.responses?.length || 0,
+      completedAt: interview.updatedAt || interview.createdAt,
+      detailedResponses: interview.responses || [],
+      confidenceAnalyticsSummary: null // Can be added later if needed
+    }));
+
+    res.json({
+      success: true,
+      data: formattedInterviews,
+      pagination: {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        total,
+        pages: Math.ceil(total / limit)
+      }
+    });
+  } catch (error) {
+    console.error('Get interview history error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch interview history',
+      error: error.message
+    });
+  }
+};

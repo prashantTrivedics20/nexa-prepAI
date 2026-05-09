@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuthToken } from "./auth";
 
 function normalizeApiBaseUrl(rawBaseUrl) {
-  const fallbackBaseUrl = "https://ai-interview-backend-hff4.onrender.com";
+  const fallbackBaseUrl = "http://localhost:5000/api";
 
   if (!rawBaseUrl || typeof rawBaseUrl !== "string") {
     return fallbackBaseUrl;
@@ -14,9 +14,8 @@ function normalizeApiBaseUrl(rawBaseUrl) {
   }
 
   const withoutTrailingSlash = trimmedBaseUrl.replace(/\/+$/, "");
-  const hasApiSegment = /\/api(\/|$)/i.test(withoutTrailingSlash);
-
-  return hasApiSegment ? withoutTrailingSlash : `${withoutTrailingSlash}/api`;
+  
+  return withoutTrailingSlash;
 }
 
 const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL;

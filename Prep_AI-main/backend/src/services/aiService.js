@@ -27,6 +27,8 @@ async function callGrok(prompt, options = {}) {
     temperature: options.temperature ?? 0.2,
     maxTokens: options.maxTokens,
     timeoutMs: options.timeoutMs || DEFAULT_TIMEOUT_MS,
+    stream: options.stream || false,
+    onChunk: options.onChunk || null,
   });
 }
 
@@ -265,4 +267,77 @@ Return STRICT JSON only:
   });
   const parsedEvaluation = parseJsonObject(rawEvaluation);
   return normalizeEvaluation(parsedEvaluation, rawEvaluation);
+};
+
+exports.chatWithAI = async (question, userMessage, context = {}) => {
+  const prompt = `
+You are an expert interview coach helping a candidate prepare for interviews.
+
+Interview Question: ${question}
+
+User's Question/Request: ${userMessage}
+
+Provide a helpful, structured response that:
+1. Directly answers their question
+2. Provides specific examples if relevant
+3. Gives actionable tips
+4. Keeps the response concise and clear
+
+Format your response in a structured way with clear sections.
+Be encouraging and supportive while being informative.
+`;
+
+  const response = await callGrok(prompt, {
+    temperature: 0.3,
+    maxTokens: 800,
+  });
+
+  return {
+    response: response,
+    timestamp: new Date().toISOString()
+  };
+};
+
+exports.generalChat = async (userMessage, context = {}, options = {}) => {
+  const contextType = context?.context || 'general_chat';
+  
+  const prompt = `
+You are NexaAura InterviewAI, an expert AI assistant specializing in interview preparation, career advice, and professional development.
+
+User's Question: ${userMessage}
+
+Provide a helpful, professional response that:
+1. Directly answers their question with expertise
+2. Provides specific, actionable advice
+3. Uses examples when relevant
+4. Keeps the response clear, concise, and well-structured
+5. Is encouraging and supportive
+
+If the question is about:
+- Interview preparation: Give specific strategies, tips, and frameworks (like STAR method)
+- Technical topics: Explain concepts clearly with examples
+- Career advice: Provide practical, actionable guidance
+- Coding/DSA: Explain approaches, patterns, and best practices
+- Behavioral questions: Suggest frameworks and example responses
+- Resume/LinkedIn: Give specific improvement suggestions
+
+Format your response in a clear, readable way.
+Be professional yet friendly and encouraging.
+`;
+
+  const response = await callGrok(prompt, {
+    temperature: 0.3,
+    maxTokens: 1000,
+    stream: options.stream || false,
+    onChunk: options.onChunk || null,
+  });
+
+  if (options.stream) {
+    return response; // Return the full text after streaming
+  }
+
+  return {
+    response: response,
+    timestamp: new Date().toISOString()
+  };
 };

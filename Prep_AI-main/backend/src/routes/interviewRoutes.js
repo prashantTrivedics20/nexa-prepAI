@@ -7,15 +7,20 @@ const {
   submitAnswer,
   evaluateSingleAnswer,
   finishInterview,
+  getInterviewHistory,
 } = require("../controllers/interviewController");
 const { testSTT } = require("../controllers/testController");
-const { optionalAuth } = require("../middleware/authMiddleware");
+const { optionalAuth, requireAuth } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 const uploadsDir = path.resolve(__dirname, "../../uploads");
 fs.mkdirSync(uploadsDir, { recursive: true });
 const upload = multer({ dest: uploadsDir });
 
+// Protected routes (require authentication)
+router.get("/history", requireAuth, getInterviewHistory);
+
+// Public/optional auth routes
 router.post("/start", optionalAuth, startInterview);
 router.post("/generate", optionalAuth, startInterview);
 router.post("/answer", submitAnswer);

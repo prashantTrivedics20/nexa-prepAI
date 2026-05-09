@@ -1,15 +1,13 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import API from "../services/api";
+import { isAuthenticated } from "../services/auth";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 import AuthProfileMenu from "../components/AuthProfileMenu";
+import "../styles/professional-pages.css";
 
 const INTERVIEW_HISTORY_KEY = "interviewHistory";
-const SAMPLE_WEAK_TOPICS = [
-  { topic: "React", averageScore: 8.2, attempts: 4, isSample: true },
-  { topic: "Node.js", averageScore: 6.5, attempts: 3, isSample: true },
-  { topic: "DSA", averageScore: 5.8, attempts: 5, isSample: true },
-];
 const TOPIC_RULES = [
   {
     topic: "React",
@@ -348,8 +346,9 @@ function analyzeWeakTopics(interviewHistory) {
     })
     .sort((left, right) => left.averageScore - right.averageScore);
 
+  // Return empty array if no real data, don't show sample data
   if (!analyzedTopics.length) {
-    return SAMPLE_WEAK_TOPICS;
+    return [];
   }
 
   return analyzedTopics.slice(0, 5);
@@ -357,22 +356,60 @@ function analyzeWeakTopics(interviewHistory) {
 
 function ReportPage() {
   const navigate = useNavigate();
-  const report = useMemo(() => normalizeResult(parseStoredResult()), []);
-  const storedHistory = useMemo(
-    () => parseStoredHistory().map(normalizeHistoryEntry).filter(Boolean),
-    []
-  );
+  const [dbInterviewHistory, setDbInterviewHistory] = useState([]);
+  const [loadingHistory, setLoadingHistory] = useState(true);
+  const [currentReport, setCurrentReport] = useState(null);
+  
+  // Only use current report from localStorage if it exists (for just-completed interview)
+  const localReport = useMemo(() => normalizeResult(parseStoredResult()), []);
 
+  // Fetch interview history from database
+  useEffect(() => {
+    const fetchInterviewHistory = async () => {
+      if (!isAuthenticated()) {
+        setLoadingHistory(false);
+        return;
+      }
+
+      try {
+        const response = await API.get('/interview/history');
+        if (response.data?.data) {
+          setDbInterviewHistory(response.data.data);
+          
+          // If no local report, use the most recent from database
+          if (!localReport && response.data.data.length > 0) {
+            setCurrentReport(response.data.data[0]);
+          } else if (localReport) {
+            setCurrentReport(localReport);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch interview history from database:', error);
+        // If fetch fails and we have local report, use it
+        if (localReport) {
+          setCurrentReport(localReport);
+        }
+      } finally {
+        setLoadingHistory(false);
+      }
+    };
+
+    fetchInterviewHistory();
+  }, [localReport]);
+
+  const report = currentReport;
   const score = Number.isFinite(report?.finalScore) ? report.finalScore : 0;
   const responses = report?.detailedResponses || [];
   const answeredCount = report?.answeredQuestions || responses.length;
   const scorePercent = Math.max(0, Math.min(score * 10, 100));
   const confidenceSummary =
     report?.confidenceAnalyticsSummary || summarizeConfidenceFromResponses(responses);
-  const interviewHistory = useMemo(
-    () => mergeCurrentReportIntoHistory(storedHistory, report),
-    [report, storedHistory]
-  );
+  
+  // Use database history directly (no localStorage merge)
+  const interviewHistory = useMemo(() => {
+    return mergeCurrentReportIntoHistory(dbInterviewHistory, report);
+  }, [dbInterviewHistory, report]);
+  
   const recentHistory = interviewHistory.slice(0, 8);
   const scoreGraphEntries = [...recentHistory].reverse();
   const averageHistoricalScore = calculateAverageScore(interviewHistory);
@@ -454,7 +491,7 @@ function ReportPage() {
           <p>Review your final score, AI feedback, and answer-by-answer evaluation details.</p>
         </motion.section>
 
-        {!report && (
+        {!report && !loadingHistory && interviewHistory.length === 0 && (
           <motion.section
             className="single-card-wrap home-fade-up"
             variants={revealUp}
@@ -469,23 +506,90 @@ function ReportPage() {
                 Complete an interview session first to generate report analytics.
               </p>
               <div className="app-button-row">
-                <button type="button" className="app-btn" onClick={() => navigate("/resume")}>
-                  Upload Resume
+                <button
+                  type="button"
+                  className="app-btn"
+                  onClick={() => navigate("/interview")}
+                >
+                  Start Interview
                 </button>
                 <button
                   type="button"
                   className="app-btn secondary"
-                  onClick={() => navigate("/interview")}
+                  onClick={() => navigate("/questions")}
                 >
-                  Go To Interview
+                  Practice Questions
                 </button>
               </div>
             </motion.article>
           </motion.section>
         )}
 
-        {!!report && (
+        {loadingHistory && !report && (
+          <motion.section
+            className="single-card-wrap home-fade-up"
+            variants={revealUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <motion.article className="glass-card" variants={revealUp}>
+              <div style={{ textAlign: 'center', padding: '2rem' }}>
+                <div style={{ 
+                  width: '60px', 
+                  height: '60px', 
+                  border: '4px solid var(--border-primary)', 
+                  borderTop: '4px solid var(--color-primary-500)',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite',
+                  margin: '0 auto 1rem'
+                }}></div>
+                <p className="muted-copy">Loading your interview history...</p>
+              </div>
+            </motion.article>
+          </motion.section>
+        )}
+
+        {(!!report || (!loadingHistory && interviewHistory.length > 0)) && (
           <>
+            {!report && interviewHistory.length > 0 && (
+              <motion.section
+                className="single-card-wrap home-fade-up"
+                variants={revealUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={revealViewport}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{ marginBottom: '2rem' }}
+              >
+                <motion.article className="glass-card" variants={revealUp}>
+                  <h2>📊 Your Interview History</h2>
+                  <p className="muted-copy">
+                    You have completed {interviewHistory.length} interview{interviewHistory.length > 1 ? 's' : ''}. 
+                    View your past performance and analytics below.
+                  </p>
+                  <div className="app-button-row">
+                    <button
+                      type="button"
+                      className="app-btn"
+                      onClick={() => navigate("/interview")}
+                    >
+                      Start New Interview
+                    </button>
+                    <button
+                      type="button"
+                      className="app-btn secondary"
+                      onClick={() => navigate("/questions")}
+                    >
+                      Practice Questions
+                    </button>
+                  </div>
+                </motion.article>
+              </motion.section>
+            )}
+            
+            {!!report && (
             <motion.section
               className="app-grid report-layout home-fade-up"
               variants={revealStagger}
@@ -593,6 +697,7 @@ function ReportPage() {
                 )}
               </motion.article>
             </motion.section>
+            )}
 
             <motion.section
               className="app-grid progress-dashboard home-fade-up"
@@ -712,24 +817,30 @@ function ReportPage() {
 
               <motion.article className="glass-card" variants={revealUp}>
                 <h2>Weak Topic Analysis</h2>
-                <div className="topic-analysis-list">
-                  {weakTopics.map((topic) => (
-                    <div key={topic.topic} className="topic-analysis-item">
-                      <div className="title-row">
-                        <p className="dashboard-item-title">{topic.topic}</p>
-                        <span className={`score-chip ${scoreBand(topic.averageScore)}`}>
-                          {topic.averageScore.toFixed(1)}
-                        </span>
+                {weakTopics.length === 0 ? (
+                  <p className="muted-copy">
+                    Complete more interviews to see topic-wise performance analysis.
+                  </p>
+                ) : (
+                  <div className="topic-analysis-list">
+                    {weakTopics.map((topic) => (
+                      <div key={topic.topic} className="topic-analysis-item">
+                        <div className="title-row">
+                          <p className="dashboard-item-title">{topic.topic}</p>
+                          <span className={`score-chip ${scoreBand(topic.averageScore)}`}>
+                            {topic.averageScore.toFixed(1)}
+                          </span>
+                        </div>
+                        <div className="topic-score-track">
+                          <div style={{ width: `${clamp(topic.averageScore * 10, 0, 100)}%` }} />
+                        </div>
+                        <p className="dashboard-item-meta">
+                          {topic.attempts} scored responses
+                        </p>
                       </div>
-                      <div className="topic-score-track">
-                        <div style={{ width: `${clamp(topic.averageScore * 10, 0, 100)}%` }} />
-                      </div>
-                      <p className="dashboard-item-meta">
-                        {topic.isSample ? "Sample baseline" : `${topic.attempts} scored responses`}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </motion.article>
             </motion.section>
           </>

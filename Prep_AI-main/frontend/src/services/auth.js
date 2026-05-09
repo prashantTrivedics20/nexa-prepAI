@@ -64,12 +64,14 @@ export function clearAuthSession(options = {}) {
     return;
   }
 
-  const { clearPracticeData = true } = options;
+  const { clearPracticeData = false } = options; // Changed default to false
 
   window.localStorage.removeItem(AUTH_TOKEN_KEY);
   window.localStorage.removeItem(AUTH_USER_KEY);
   window.localStorage.removeItem("prepai-remember-identity");
 
+  // Only clear practice data if explicitly requested
+  // Practice sessions are stored in database, not localStorage
   if (clearPracticeData) {
     window.localStorage.removeItem("parsedResume");
     window.localStorage.removeItem("finalResult");

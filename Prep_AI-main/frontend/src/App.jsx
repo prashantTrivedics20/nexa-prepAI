@@ -2,13 +2,18 @@ import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import EnhancedHome from "./pages/EnhancedHome";
 import Toast from "./components/Toast";
+import GlobalAIChatbot from "./components/GlobalAIChatbot";
 import "./components/components.css";
 import "./styles/enhanced-home.css";
 
-const ResumePage = lazy(() => import("./pages/ResumePage"));
+const ResumePageNew = lazy(() => import("./pages/ResumePageNew"));
 const InterviewPage = lazy(() => import("./pages/Interview"));
 const ReportPage = lazy(() => import("./pages/ReportPage"));
 const SignupPage = lazy(() => import("./pages/Signup"));
+const QuestionBank = lazy(() => import("./pages/QuestionBank"));
+const PracticePage = lazy(() => import("./pages/PracticePage"));
+const PracticeHistory = lazy(() => import("./pages/PracticeHistory"));
+const RandomPractice = lazy(() => import("./pages/RandomPractice"));
 
 function RouteLoadingFallback() {
   return (
@@ -29,10 +34,14 @@ function RouteLoadingFallback() {
 function App() {
   useEffect(() => {
     const warmRoutes = () => {
-      void import("./pages/ResumePage");
+      void import("./pages/ResumePageNew");
       void import("./pages/Interview");
       void import("./pages/ReportPage");
       void import("./pages/Signup");
+      void import("./pages/QuestionBank");
+      void import("./pages/PracticePage");
+      void import("./pages/PracticeHistory");
+      void import("./pages/RandomPractice");
     };
 
     if ("requestIdleCallback" in window) {
@@ -51,13 +60,18 @@ function App() {
   return (
     <>
       <Toast />
+      <GlobalAIChatbot />
       <Suspense fallback={<RouteLoadingFallback />}>
         <Routes>
           <Route path="/" element={<EnhancedHome />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/resume" element={<ResumePageNew />} />
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/report" element={<ReportPage />} />
+          <Route path="/questions" element={<QuestionBank />} />
+          <Route path="/practice/:id" element={<PracticePage />} />
+          <Route path="/practice-history" element={<PracticeHistory />} />
+          <Route path="/practice-random" element={<RandomPractice />} />
         </Routes>
       </Suspense>
     </>

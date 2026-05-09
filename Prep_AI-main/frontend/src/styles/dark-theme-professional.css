@@ -1,0 +1,673 @@
+/* ============================================
+   PROFESSIONAL DARK THEME
+   Inspired by Linear, Vercel, GitHub, Stripe
+   ============================================ */
+
+/* Root Variables for Dark Theme */
+:root {
+  --dark-bg-primary: #0a0a0a;
+  --dark-bg-secondary: #111111;
+  --dark-bg-tertiary: #1a1a1a;
+  --dark-border: rgba(255, 255, 255, 0.08);
+  --dark-border-hover: rgba(255, 255, 255, 0.15);
+  --dark-text-primary: #ededed;
+  --dark-text-secondary: #a1a1a1;
+  --dark-text-tertiary: #6b6b6b;
+}
+
+/* Dark Theme Overrides - Using data-theme attribute */
+[data-theme="dark"] {
+  
+  /* ============================================
+     ENHANCED HOME - DARK MODE
+     ============================================ */
+  
+  .enhanced-home {
+    background: var(--dark-bg-primary);
+    color: var(--dark-text-primary);
+  }
+
+  /* Navigation - Professional Dark */
+  .enhanced-nav {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--dark-border);
+  }
+
+  .nav-brand {
+    color: var(--dark-text-primary);
+  }
+
+  .brand-name {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links a {
+    color: var(--dark-text-secondary);
+  }
+
+  .nav-links a:hover {
+    color: var(--dark-text-primary);
+  }
+
+  /* Hero Section - Dark Mode */
+  .hero-badge {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+  }
+
+  .badge-dot {
+    background: #60a5fa;
+  }
+
+  .hero-title {
+    color: var(--dark-text-primary);
+  }
+
+  .hero-subtitle {
+    color: var(--dark-text-secondary);
+  }
+
+  .feature-item {
+    color: var(--dark-text-secondary);
+  }
+
+  .btn-hero-secondary {
+    background: var(--dark-bg-tertiary);
+    color: #60a5fa;
+    border: 1.5px solid rgba(96, 165, 250, 0.3);
+  }
+
+  .btn-hero-secondary:hover {
+    background: rgba(96, 165, 250, 0.1);
+    border-color: #60a5fa;
+  }
+
+  /* Visual Card - Dark Mode */
+  .visual-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-header {
+    border-bottom: 1px solid var(--dark-border);
+  }
+
+  .card-title {
+    color: var(--dark-text-secondary);
+  }
+
+  .card-content {
+    background: var(--dark-bg-tertiary);
+  }
+
+  .card-footer {
+    background: var(--dark-bg-tertiary);
+    border-top: 1px solid var(--dark-border);
+  }
+
+  .status-badge {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Sections - Dark Mode */
+  .section-title {
+    color: var(--dark-text-primary);
+  }
+
+  .section-subtitle {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Feature Cards - Dark Mode */
+  .feature-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .feature-card:hover {
+    border-color: var(--dark-border-hover);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .feature-title {
+    color: var(--dark-text-primary);
+  }
+
+  .feature-description {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Track Cards - Dark Mode */
+  .track-card {
+    background: var(--dark-bg-secondary);
+    border: 1.5px solid var(--dark-border);
+  }
+
+  .track-card:hover {
+    background: var(--dark-bg-tertiary);
+    border-color: var(--track-color);
+  }
+
+  .track-name {
+    color: var(--dark-text-primary);
+  }
+
+  /* Step Cards - Dark Mode */
+  .step-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .step-title {
+    color: var(--dark-text-primary);
+  }
+
+  .step-description {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Testimonial Cards - Dark Mode */
+  .testimonial-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .testimonial-text {
+    color: var(--dark-text-secondary);
+  }
+
+  .author-name {
+    color: var(--dark-text-primary);
+  }
+
+  .author-role {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Footer - Already Dark, Just Refine */
+  .enhanced-footer {
+    background: var(--dark-bg-primary);
+    border-top: 1px solid var(--dark-border);
+  }
+
+  .footer-tagline {
+    color: var(--dark-text-secondary);
+  }
+
+  /* ============================================
+     PROFESSIONAL PAGES - DARK MODE
+     ============================================ */
+
+  /* Question Bank Container */
+  .question-bank-container {
+    background: var(--dark-bg-primary);
+  }
+
+  /* Header */
+  .qb-header {
+    background: var(--dark-bg-secondary);
+    border-bottom: 1px solid var(--dark-border);
+  }
+
+  .qb-title {
+    color: var(--dark-text-primary);
+  }
+
+  .qb-subtitle {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Action Buttons */
+  .qb-action-btn {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-primary);
+  }
+
+  .qb-action-btn:hover {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border-hover);
+  }
+
+  /* Filters */
+  .qb-filters {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .qb-filters-title {
+    color: var(--dark-text-primary);
+  }
+
+  .qb-clear-btn {
+    background: transparent;
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-secondary);
+  }
+
+  .qb-clear-btn:hover {
+    background: var(--dark-bg-tertiary);
+    border-color: var(--dark-border-hover);
+  }
+
+  .qb-filter-label {
+    color: var(--dark-text-secondary);
+  }
+
+  .qb-filter-select {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-primary);
+  }
+
+  .qb-filter-select:hover {
+    border-color: var(--dark-border-hover);
+  }
+
+  .qb-filter-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+  }
+
+  /* Question Cards */
+  .qb-question-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .qb-question-card:hover {
+    border-color: var(--dark-border-hover);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .qb-card-category {
+    color: var(--dark-text-secondary);
+  }
+
+  .qb-card-question {
+    color: var(--dark-text-primary);
+  }
+
+  .qb-tag {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-secondary);
+  }
+
+  .qb-card-footer {
+    border-top: 1px solid var(--dark-border);
+  }
+
+  .qb-card-company {
+    color: var(--dark-text-secondary);
+  }
+
+  .qb-card-action {
+    color: #60a5fa;
+  }
+
+  /* Empty State */
+  .qb-empty-state {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .qb-empty-title {
+    color: var(--dark-text-primary);
+  }
+
+  .qb-empty-text {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Pagination */
+  .qb-page-btn {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-primary);
+  }
+
+  .qb-page-btn:hover:not(:disabled) {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border-hover);
+  }
+
+  .qb-page-info {
+    color: var(--dark-text-secondary);
+  }
+
+  /* ============================================
+     RESUME & REPORT PAGES - DARK MODE
+     ============================================ */
+
+  /* Glass Cards */
+  .glass-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-card h2,
+  .glass-card h3 {
+    color: var(--dark-text-primary);
+  }
+
+  /* Icon Badge */
+  .icon-badge {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+  }
+
+  .card-subtitle {
+    color: var(--dark-text-secondary);
+  }
+
+  /* File Picker */
+  .enhanced-file-picker {
+    background: var(--dark-bg-tertiary);
+    border: 2px dashed var(--dark-border);
+  }
+
+  .enhanced-file-picker:hover {
+    border-color: #60a5fa;
+    background: rgba(96, 165, 250, 0.05);
+  }
+
+  .file-picker-icon {
+    background: var(--dark-bg-secondary);
+    border: 2px solid var(--dark-border);
+  }
+
+  .file-picker-title {
+    color: var(--dark-text-primary);
+  }
+
+  .file-picker-hint {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Buttons */
+  .app-btn.secondary {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+    border: 1.5px solid var(--dark-border);
+  }
+
+  .app-btn.secondary:hover:not(:disabled) {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border-hover);
+  }
+
+  .app-btn.ghost {
+    background: transparent;
+    color: var(--dark-text-secondary);
+    border: 1.5px solid var(--dark-border);
+  }
+
+  .app-btn.ghost:hover:not(:disabled) {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+  }
+
+  .app-btn.danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .app-btn.danger:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+  }
+
+  /* Empty State */
+  .empty-state-box {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .empty-title {
+    color: var(--dark-text-primary);
+  }
+
+  .empty-text {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Resume Preview */
+  .resume-preview-section {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .resume-preview-section:hover {
+    border-color: var(--dark-border-hover);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .section-header-enhanced {
+    border-bottom: 1px solid var(--dark-border);
+  }
+
+  .section-header-enhanced h3 {
+    color: var(--dark-text-primary);
+  }
+
+  .item-count {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-secondary);
+  }
+
+  .resume-preview-section li {
+    color: var(--dark-text-secondary);
+  }
+
+  .resume-preview-section .bullet {
+    color: #60a5fa;
+  }
+
+  /* Preview Badge */
+  .preview-badge {
+    color: var(--dark-text-secondary);
+    background: var(--dark-bg-tertiary);
+  }
+
+  .app-previewer {
+    background: #000000;
+    color: #e5e7eb;
+    border: 1px solid var(--dark-border);
+  }
+
+  /* Progress Track */
+  .progress-track {
+    background: var(--dark-bg-tertiary);
+  }
+
+  .muted-copy {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Confidence Report Box */
+  .confidence-report-box {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .confidence-report-box h3 {
+    color: var(--dark-text-primary);
+  }
+
+  .confidence-metric-line {
+    color: var(--dark-text-secondary);
+  }
+
+  .confidence-metric-line strong {
+    color: var(--dark-text-primary);
+  }
+
+  /* Feedback Box */
+  .app-feedback-box {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .app-feedback-box h3 {
+    color: #fbbf24;
+  }
+
+  .app-feedback-box p {
+    color: var(--dark-text-secondary);
+  }
+
+  /* History Items */
+  .history-item {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .history-item:hover {
+    border-color: var(--dark-border-hover);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .history-question {
+    color: var(--dark-text-primary);
+  }
+
+  .history-answer {
+    color: var(--dark-text-secondary);
+  }
+
+  .evaluation-text {
+    color: var(--dark-text-secondary);
+    border-top: 1px solid var(--dark-border);
+  }
+
+  .confidence-inline-summary {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .confidence-inline-summary p {
+    color: var(--dark-text-secondary);
+  }
+
+  .confidence-inline-summary strong {
+    color: var(--dark-text-primary);
+  }
+
+  /* Dashboard Items */
+  .dashboard-list-item {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .dashboard-list-item:hover {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border-hover);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .dashboard-item-title {
+    color: var(--dark-text-primary);
+  }
+
+  .dashboard-item-meta {
+    color: var(--dark-text-secondary);
+  }
+
+  .dashboard-confidence {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+  }
+
+  /* Score Graph */
+  .score-bar-track-vertical {
+    background: var(--dark-bg-tertiary);
+  }
+
+  .score-average-line span {
+    background: var(--dark-bg-secondary);
+  }
+
+  .score-bar-label {
+    color: var(--dark-text-secondary);
+  }
+
+  /* Topic Analysis */
+  .topic-analysis-item {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .topic-score-track {
+    background: var(--dark-bg-tertiary);
+  }
+
+  /* App Shell */
+  .app-shell {
+    background: var(--dark-bg-primary);
+    color: var(--dark-text-primary);
+  }
+
+  .home-navbar {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--dark-border);
+  }
+
+  .home-brand {
+    color: var(--dark-text-primary);
+  }
+
+  .brand-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .home-menu a {
+    color: var(--dark-text-secondary);
+  }
+
+  .home-menu a:hover {
+    color: var(--dark-text-primary);
+  }
+
+  .home-signin {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border);
+  }
+
+  .home-signin:hover {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border-hover);
+  }
+
+  /* Page Headers */
+  .app-page-header {
+    color: var(--dark-text-primary);
+  }
+
+  .app-page-header p {
+    color: var(--dark-text-secondary);
+  }
+
+  .app-kicker {
+    color: var(--dark-text-secondary);
+  }
+}
