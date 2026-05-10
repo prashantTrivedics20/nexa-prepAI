@@ -26,7 +26,8 @@ function Navbar() {
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/questions" className="nav-link">Question Bank</Link>
-          <Link to="/resume" className="nav-link">AI Interview</Link>
+          <Link to="/resume" className="nav-link">Resume</Link>
+          <Link to="/interview" className="nav-link">AI Interview</Link>
           <Link to="/ai-generator" className="nav-link">AI Generator</Link>
           <Link to="/mock-interviewer" className="nav-link">Mock Interview</Link>
           <Link to="/report" className="nav-link">Reports</Link>
@@ -92,6 +93,9 @@ function Navbar() {
             Question Bank
           </Link>
           <Link to="/resume" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
+            Resume
+          </Link>
+          <Link to="/interview" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
             AI Interview
           </Link>
           <Link to="/ai-generator" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
