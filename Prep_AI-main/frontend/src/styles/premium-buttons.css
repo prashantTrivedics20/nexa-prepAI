@@ -1,0 +1,244 @@
+/* ============================================
+   PREMIUM BUTTON STYLES
+   ============================================ */
+
+/* Base Button */
+.btn-premium {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-premium:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-premium:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.btn-premium:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 
+    0 4px 6px -1px rgba(102, 126, 234, 0.3),
+    0 2px 4px -1px rgba(102, 126, 234, 0.2);
+}
+
+.btn-primary:not(:disabled):hover {
+  box-shadow: 
+    0 10px 15px -3px rgba(102, 126, 234, 0.4),
+    0 4px 6px -2px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #7c8ff0 0%, #8b5cb8 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-primary:not(:disabled):hover::before {
+  opacity: 1;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #4b5563;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: white;
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Success Button */
+.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 
+    0 4px 6px -1px rgba(16, 185, 129, 0.3),
+    0 2px 4px -1px rgba(16, 185, 129, 0.2);
+}
+
+.btn-success:not(:disabled):hover {
+  box-shadow: 
+    0 10px 15px -3px rgba(16, 185, 129, 0.4),
+    0 4px 6px -2px rgba(16, 185, 129, 0.3);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 
+    0 4px 6px -1px rgba(239, 68, 68, 0.3),
+    0 2px 4px -1px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:not(:disabled):hover {
+  box-shadow: 
+    0 10px 15px -3px rgba(239, 68, 68, 0.4),
+    0 4px 6px -2px rgba(239, 68, 68, 0.3);
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-ghost:not(:disabled):hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 17px;
+  border-radius: 12px;
+}
+
+/* Button with Icon */
+.btn-icon {
+  padding: 12px;
+  aspect-ratio: 1;
+}
+
+.btn-icon.btn-sm {
+  padding: 8px;
+}
+
+.btn-icon.btn-lg {
+  padding: 16px;
+}
+
+/* Loading State */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: btnSpin 0.6s linear infinite;
+  color: white;
+}
+
+@keyframes btnSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Button Group */
+.btn-group {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.btn-group-attached {
+  display: inline-flex;
+  gap: 0;
+}
+
+.btn-group-attached .btn-premium {
+  border-radius: 0;
+}
+
+.btn-group-attached .btn-premium:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.btn-group-attached .btn-premium:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+/* Ripple Effect */
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s, opacity 0.5s;
+  pointer-events: none;
+}
+
+.btn-premium:not(:disabled):active::after {
+  transform: scale(2);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .btn-secondary {
+  background: rgba(31, 41, 55, 0.9);
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-secondary:not(:disabled):hover {
+  background: rgba(55, 65, 81, 0.9);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+[data-theme="dark"] .btn-ghost {
+  color: #d1d5db;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-ghost:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}

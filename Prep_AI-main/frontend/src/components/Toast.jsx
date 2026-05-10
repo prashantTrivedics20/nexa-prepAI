@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import "./Toast.css";
 
-const TOAST_DURATION = 4000;
+const TOAST_DURATION = 5000;
 const TOAST_TYPES = {
   success: {
     icon: "✓",
-    bgColor: "bg-green-600",
-    iconBg: "bg-green-700",
+    title: "Success",
   },
   error: {
     icon: "✕",
-    bgColor: "bg-red-600",
-    iconBg: "bg-red-700",
+    title: "Error",
   },
   warning: {
     icon: "⚠",
-    bgColor: "bg-yellow-600",
-    iconBg: "bg-yellow-700",
+    title: "Warning",
   },
   info: {
     icon: "ℹ",
-    bgColor: "bg-blue-600",
-    iconBg: "bg-blue-700",
+    title: "Info",
   },
 };
 
@@ -71,24 +68,31 @@ export function Toast() {
           return (
             <motion.div
               key={toast.id}
-              className={`toast-item ${config.bgColor}`}
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
+              className={`toast ${toast.type}`}
+              initial={{ opacity: 0, x: 100, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 100, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               layout
             >
-              <div className={`toast-icon ${config.iconBg}`}>
-                {config.icon}
+              <div className="toast-icon">{config.icon}</div>
+              <div className="toast-content">
+                <div className="toast-title">{config.title}</div>
+                <div className="toast-message">{toast.message}</div>
               </div>
-              <p className="toast-message">{toast.message}</p>
               <button
                 className="toast-close"
                 onClick={() => removeToast(toast.id)}
-                aria-label="Close notification"
+                aria-label="Close"
               >
-                ✕
+                ×
               </button>
+              <div className="toast-progress">
+                <div 
+                  className="toast-progress-bar" 
+                  style={{ animationDuration: `${toast.duration}ms` }} 
+                />
+              </div>
             </motion.div>
           );
         })}

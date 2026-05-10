@@ -6,6 +6,8 @@ import GlobalAIChatbot from "./components/GlobalAIChatbot";
 import VoiceAIAssistant from "./components/VoiceAIAssistant";
 import "./components/components.css";
 import "./styles/enhanced-home.css";
+import "./styles/premium-buttons.css";
+import "./styles/premium-cards.css";
 
 const ResumePageNew = lazy(() => import("./pages/ResumePageNew"));
 const InterviewPage = lazy(() => import("./pages/Interview"));
