@@ -1,0 +1,430 @@
+/* ============================================
+   GLOBAL UI POLISH - NON-INVASIVE ENHANCEMENTS
+   Improves visual appeal without changing functionality
+   ============================================ */
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better Font Rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus Visible (Better Accessibility) */
+*:focus-visible {
+  outline: 2px solid rgba(102, 126, 234, 0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(102, 126, 234, 0.2);
+  color: inherit;
+}
+
+/* Smooth Transitions for Interactive Elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced Button Hover (Global) */
+button:not(:disabled):hover,
+.btn:not(:disabled):hover,
+[role="button"]:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+button:not(:disabled):active,
+.btn:not(:disabled):active,
+[role="button"]:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Better Input Fields */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Card Hover Enhancement (Global) */
+[class*="card"]:not([class*="card-icon"]):hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Link Hover */
+a:not([class*="btn"]):not([class*="nav"]) {
+  transition: color 0.2s ease;
+}
+
+a:not([class*="btn"]):not([class*="nav"]):hover {
+  opacity: 0.8;
+}
+
+/* Loading States */
+[disabled],
+[aria-disabled="true"]
+
+{
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Image Loading */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Better Scrollbar (Webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Subtle Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Better Modal/Dialog Backdrop */
+[class*="modal"],
+[class*="dialog"],
+[class*="overlay"] {
+  backdrop-filter: blur(8px);
+}
+
+/* Skeleton Loading Enhancement */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading-skeleton,
+[class*="skeleton"] {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+[data-theme="dark"] .loading-skeleton,
+[data-theme="dark"] [class*="skeleton"] {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Tooltip Enhancement */
+[title]:hover::after {
+  transition: opacity 0.2s ease 0.5s;
+}
+
+/* Form Validation States */
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+input:valid:not(:placeholder-shown),
+textarea:valid:not(:placeholder-shown) {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+/* Better Checkbox & Radio */
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+  transform: scale(1.1);
+}
+
+/* Dropdown Enhancement */
+select {
+  cursor: pointer;
+}
+
+select:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Badge/Tag Enhancement */
+[class*="badge"],
+[class*="tag"],
+[class*="chip"] {
+  transition: all 0.2s ease;
+}
+
+[class*="badge"]:hover,
+[class*="tag"]:hover,
+[class*="chip"]:hover {
+  transform: scale(1.05);
+}
+
+/* Alert/Notification Enhancement */
+[class*="alert"],
+[class*="notification"],
+[class*="message"] {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Table Enhancement */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+table tr {
+  transition: background-color 0.2s ease;
+}
+
+table tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Progress Bar Enhancement */
+[class*="progress"] {
+  overflow: hidden;
+  position: relative;
+}
+
+[class*="progress"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Icon Enhancement */
+[class*="icon"],
+svg:not([class*="logo"]) {
+  transition: transform 0.2s ease;
+}
+
+button:hover [class*="icon"],
+button:hover svg:not([class*="logo"]),
+a:hover [class*="icon"],
+a:hover svg:not([class*="logo"]) {
+  transform: scale(1.1);
+}
+
+/* Divider Enhancement */
+hr,
+[class*="divider"] {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+}
+
+[data-theme="dark"] hr,
+[data-theme="dark"] [class*="divider"] {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* Accordion/Collapse Enhancement */
+[class*="accordion"],
+[class*="collapse"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tab Enhancement */
+[role="tab"],
+[class*="tab"] {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+[role="tab"]::after,
+[class*="tab"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+[role="tab"][aria-selected="true"]::after,
+[class*="tab"].active::after {
+  transform: scaleX(1);
+}
+
+/* Pagination Enhancement */
+[class*="pagination"] button,
+[class*="pagination"] a {
+  transition: all 0.2s ease;
+}
+
+[class*="pagination"] button:hover,
+[class*="pagination"] a:hover {
+  background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* Avatar Enhancement */
+[class*="avatar"] {
+  transition: all 0.2s ease;
+}
+
+[class*="avatar"]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
