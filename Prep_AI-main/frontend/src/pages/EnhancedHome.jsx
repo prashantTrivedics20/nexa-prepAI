@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,11 +5,8 @@ import Navbar from "../components/Navbar";
 import "../styles/design-system.css";
 import "./EnhancedHome.css";
 
-const HERO_VIDEO_SOURCE = "/homepage.mp4";
-
 function EnhancedHome() {
   const navigate = useNavigate();
-  const [videoError, setVideoError] = useState(false);
 
   const features = [
     {
@@ -129,24 +125,61 @@ function EnhancedHome() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {!videoError ? (
-              <video
-                className="hero-video"
-                autoPlay
-                loop
-                muted
-                playsInline
-                onError={() => setVideoError(true)}
-              >
-                <source src={HERO_VIDEO_SOURCE} type="video/mp4" />
-              </video>
-            ) : (
-              <div className="hero-placeholder">
-                <div className="placeholder-icon">🎯</div>
-                <div className="placeholder-text">AI Interview Practice</div>
+            <div className="hero-gradient-mesh">
+              {/* Animated gradient orbs */}
+              <div className="gradient-orb gradient-orb-1"></div>
+              <div className="gradient-orb gradient-orb-2"></div>
+              <div className="gradient-orb gradient-orb-3"></div>
+              
+              {/* Floating elements */}
+              <div className="floating-element floating-element-1">
+                <div className="element-icon">💼</div>
+                <div className="element-label">Interview Ready</div>
               </div>
-            )}
-            <div className="video-overlay"></div>
+              
+              <div className="floating-element floating-element-2">
+                <div className="element-icon">🎯</div>
+                <div className="element-label">AI Powered</div>
+              </div>
+              
+              <div className="floating-element floating-element-3">
+                <div className="element-icon">📊</div>
+                <div className="element-label">Track Progress</div>
+              </div>
+              
+              {/* Center mockup card */}
+              <div className="hero-mockup-card">
+                <div className="mockup-header">
+                  <div className="mockup-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div className="mockup-title">AI Interview Assistant</div>
+                </div>
+                <div className="mockup-content">
+                  <div className="mockup-message">
+                    <div className="message-avatar">🤖</div>
+                    <div className="message-text">
+                      <div className="message-label">AI Interviewer</div>
+                      <div className="message-bubble">Tell me about your experience with React...</div>
+                    </div>
+                  </div>
+                  <div className="mockup-message mockup-message-user">
+                    <div className="message-text">
+                      <div className="message-label">You</div>
+                      <div className="message-bubble">I have 3 years of experience building...</div>
+                    </div>
+                    <div className="message-avatar">👤</div>
+                  </div>
+                  <div className="mockup-typing">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
