@@ -7,7 +7,7 @@
 .voice-ai-fab {
   position: fixed;
   bottom: 2rem;
-  right: 7.5rem; /* Moved left to make space for GlobalAIChatbot */
+  right: 9rem; /* Increased spacing to avoid overlap */
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -665,7 +665,7 @@
 @media (max-width: 768px) {
   .voice-ai-fab {
     bottom: 1.5rem;
-    right: 6.5rem; /* Adjusted for mobile to avoid overlap */
+    right: 8rem; /* Increased spacing for mobile */
     width: 56px;
     height: 56px;
   }
