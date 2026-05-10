@@ -337,7 +337,7 @@ function InterviewPage() {
   const ttsCacheRef = useRef(new Map());
   const ttsInFlightRef = useRef(new Map());
 
-  const [parsedResume] = useState(() => parseStoredData(localStorage.getItem("parsedResume")));
+  const [parsedResume, setParsedResume] = useState(() => parseStoredData(localStorage.getItem("parsedResume")));
   const [interviewId, setInterviewId] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -361,6 +361,7 @@ function InterviewPage() {
   const [pendingVoiceMetrics, setPendingVoiceMetrics] = useState(null);
   const [liveWaveformBars, setLiveWaveformBars] = useState(() => createIdleWaveformBars());
   const [voiceIntensityLevel, setVoiceIntensityLevel] = useState(0);
+  const [isFetchingResume, setIsFetchingResume] = useState(false);
 
   const answeredCount = history.length;
   const progressPercent =
@@ -688,6 +689,29 @@ function InterviewPage() {
 
     navigate("/signup?mode=login&redirect=/interview", { replace: true });
   }, [navigate]);
+
+  // Fetch resume from database if not in localStorage
+  useEffect(() => {
+    if (parsedResume || !isAuthenticated() || isFetchingResume) {
+      return;
+    }
+
+    setIsFetchingResume(true);
+    API.get("/resume/me")
+      .then((response) => {
+        const resumeData = response.data?.parsedData;
+        if (resumeData) {
+          setParsedResume(resumeData);
+          localStorage.setItem("parsedResume", JSON.stringify(resumeData));
+        }
+      })
+      .catch(() => {
+        // Resume not found in database, user needs to upload
+      })
+      .finally(() => {
+        setIsFetchingResume(false);
+      });
+  }, [parsedResume, isFetchingResume]);
 
   const releaseMicResources = () => {
     stopAudioMonitoring();
