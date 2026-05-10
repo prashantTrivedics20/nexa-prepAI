@@ -240,11 +240,36 @@
   border-radius: var(--radius-2xl);
   transition: all var(--transition-base);
   cursor: default;
+  position: relative;
 }
 
 .feature-card:hover {
   border-color: var(--border-secondary);
   box-shadow: var(--shadow-lg);
+}
+
+.feature-card-clickable {
+  cursor: pointer;
+}
+
+.feature-card-clickable:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+}
+
+.feature-arrow {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  color: var(--color-primary);
+  opacity: 0;
+  transition: all var(--transition-base);
+}
+
+.feature-card-clickable:hover .feature-arrow {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 .feature-icon {

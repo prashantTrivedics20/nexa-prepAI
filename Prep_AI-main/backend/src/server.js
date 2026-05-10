@@ -45,6 +45,8 @@ app.use("/api/resume", require("./routes/resumeRoutes"));
 app.use("/api/test", require("./routes/testRoutes"));
 app.use("/api/questions", require("./routes/questionRoutes"));
 app.use("/api/voice", require("./routes/voiceRoutes"));
+app.use("/api/question-generator", require("./routes/questionGeneratorRoutes"));
+app.use("/api/mock-interviewer", require("./routes/mockInterviewerRoutes"));
 
 // Backward-compatible aliases (without /api prefix)
 app.use("/auth", require("./routes/authRoutes"));
@@ -53,6 +55,8 @@ app.use("/resume", require("./routes/resumeRoutes"));
 app.use("/test", require("./routes/testRoutes"));
 app.use("/questions", require("./routes/questionRoutes"));
 app.use("/voice", require("./routes/voiceRoutes"));
+app.use("/question-generator", require("./routes/questionGeneratorRoutes"));
+app.use("/mock-interviewer", require("./routes/mockInterviewerRoutes"));
 
 // Root endpoint
 app.get("/", (req, res) => {

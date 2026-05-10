@@ -27,6 +27,8 @@ function Navbar() {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/questions" className="nav-link">Question Bank</Link>
           <Link to="/resume" className="nav-link">AI Interview</Link>
+          <Link to="/ai-generator" className="nav-link">AI Generator</Link>
+          <Link to="/mock-interviewer" className="nav-link">Mock Interview</Link>
           <Link to="/report" className="nav-link">Reports</Link>
           <a 
             href="https://nexaaura-doc-hub.vercel.app/" 
@@ -91,6 +93,12 @@ function Navbar() {
           </Link>
           <Link to="/resume" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
             AI Interview
+          </Link>
+          <Link to="/ai-generator" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
+            AI Generator
+          </Link>
+          <Link to="/mock-interviewer" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
+            Mock Interview
           </Link>
           <Link to="/report" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
             Reports

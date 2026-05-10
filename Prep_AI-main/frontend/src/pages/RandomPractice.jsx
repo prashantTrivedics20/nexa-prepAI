@@ -10,7 +10,25 @@ function RandomPractice() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchRandomQuestion();
+    // Check if there's a question from AI Generator in localStorage
+    const storedQuestion = localStorage.getItem('practiceQuestion');
+    
+    if (storedQuestion) {
+      try {
+        const question = JSON.parse(storedQuestion);
+        // Clear the stored question
+        localStorage.removeItem('practiceQuestion');
+        
+        // Navigate to practice page with the question data
+        // Since AI-generated questions don't have an _id, we'll create a temporary practice session
+        navigate('/practice/ai-generated', { state: { question } });
+      } catch (error) {
+        console.error('Failed to parse stored question:', error);
+        fetchRandomQuestion();
+      }
+    } else {
+      fetchRandomQuestion();
+    }
   }, []);
 
   const fetchRandomQuestion = async () => {

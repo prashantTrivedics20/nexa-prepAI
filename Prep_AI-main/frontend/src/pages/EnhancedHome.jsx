@@ -24,6 +24,18 @@ function EnhancedHome() {
       description: "Practice speaking naturally with real-time voice recognition",
     },
     {
+      icon: "🤖",
+      title: "AI Question Generator",
+      description: "Generate personalized questions based on your resume, role, or weak topics",
+      link: "/ai-generator",
+    },
+    {
+      icon: "👔",
+      title: "AI Mock Interviewer",
+      description: "Practice with a conversational AI interviewer that asks follow-up questions",
+      link: "/mock-interviewer",
+    },
+    {
       icon: "📊",
       title: "Progress Analytics",
       description: "Track your improvement with comprehensive performance metrics",
@@ -32,9 +44,10 @@ function EnhancedHome() {
       icon: "📝",
       title: "Question Bank",
       description: "Access 300+ curated interview questions across multiple domains",
+      link: "/questions",
     },
     {
-      icon: "🤖",
+      icon: "💬",
       title: "AI Chat Assistant",
       description: "Get help structuring answers with our intelligent chatbot",
     },
@@ -42,6 +55,7 @@ function EnhancedHome() {
       icon: "📄",
       title: "Resume Analysis",
       description: "Upload your resume for personalized question generation",
+      link: "/resume",
     },
   ];
 
@@ -153,21 +167,33 @@ function EnhancedHome() {
           </motion.div>
 
           <div className="features-grid">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="feature-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="feature-icon">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-              </motion.div>
-            ))}
+            {features.map((feature, index) => {
+              const FeatureCard = (
+                <motion.div
+                  key={index}
+                  className={`feature-card ${feature.link ? 'feature-card-clickable' : ''}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -4 }}
+                  onClick={feature.link ? () => navigate(feature.link) : undefined}
+                  style={feature.link ? { cursor: 'pointer' } : {}}
+                >
+                  <div className="feature-icon">{feature.icon}</div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                  {feature.link && (
+                    <div className="feature-arrow">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </div>
+                  )}
+                </motion.div>
+              );
+              return FeatureCard;
+            })}
           </div>
         </div>
       </section>
@@ -231,6 +257,8 @@ function EnhancedHome() {
               <h4 className="footer-heading">Product</h4>
               <Link to="/questions" className="footer-link">Question Bank</Link>
               <Link to="/resume" className="footer-link">AI Interview</Link>
+              <Link to="/ai-generator" className="footer-link">AI Generator</Link>
+              <Link to="/mock-interviewer" className="footer-link">Mock Interview</Link>
               <Link to="/report" className="footer-link">Reports</Link>
             </div>
 

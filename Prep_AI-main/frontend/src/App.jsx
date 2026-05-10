@@ -15,6 +15,8 @@ const QuestionBank = lazy(() => import("./pages/QuestionBank"));
 const PracticePage = lazy(() => import("./pages/PracticePage"));
 const PracticeHistory = lazy(() => import("./pages/PracticeHistory"));
 const RandomPractice = lazy(() => import("./pages/RandomPractice"));
+const AIQuestionGenerator = lazy(() => import("./pages/AIQuestionGenerator"));
+const AIMockInterviewer = lazy(() => import("./pages/AIMockInterviewer"));
 
 function RouteLoadingFallback() {
   return (
@@ -43,6 +45,8 @@ function App() {
       void import("./pages/PracticePage");
       void import("./pages/PracticeHistory");
       void import("./pages/RandomPractice");
+      void import("./pages/AIQuestionGenerator");
+      void import("./pages/AIMockInterviewer");
     };
 
     if ("requestIdleCallback" in window) {
@@ -74,6 +78,8 @@ function App() {
           <Route path="/practice/:id" element={<PracticePage />} />
           <Route path="/practice-history" element={<PracticeHistory />} />
           <Route path="/practice-random" element={<RandomPractice />} />
+          <Route path="/ai-generator" element={<AIQuestionGenerator />} />
+          <Route path="/mock-interviewer" element={<AIMockInterviewer />} />
         </Routes>
       </Suspense>
     </>

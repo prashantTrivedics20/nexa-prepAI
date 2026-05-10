@@ -27,32 +27,80 @@ function PracticeHistory() {
       console.log('Auth token exists:', !!token);
       console.log('Token preview:', token ? token.substring(0, 20) + '...' : 'none');
       
-      const [historyRes, analyticsRes] = await Promise.all([
-        api.get(`/questions/history?page=${page}&limit=10`),
-        api.get('/questions/analytics')
-      ]);
+      // Get AI-generated sessions from localStorage
+      const aiSessions = JSON.parse(localStorage.getItem('aiPracticeSessions') || '[]');
+      console.log('AI sessions from localStorage:', aiSessions.length);
+      
+      let dbSessions = [];
+      let dbAnalytics = null;
+      
+      // Try to fetch from database if authenticated
+      try {
+        const [historyRes, analyticsRes] = await Promise.all([
+          api.get(`/questions/history?page=${page}&limit=10`),
+          api.get('/questions/analytics')
+        ]);
+        
+        dbSessions = historyRes.data.data || [];
+        setTotalPages(historyRes.data.pagination.pages);
+        dbAnalytics = analyticsRes.data.data;
+      } catch (dbError) {
+        console.log('Database fetch failed (user might not be logged in):', dbError.response?.status);
+        // User not logged in - that's okay, we'll show AI sessions
+      }
+      
+      // Combine database and AI sessions
+      const combinedSessions = [...aiSessions, ...dbSessions].sort((a, b) => 
+        new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      
+      // Calculate combined analytics
+      const totalAISessions = aiSessions.length;
+      const totalDBSessions = dbAnalytics?.totalSessions || 0;
+      const avgAIScore = aiSessions.length > 0 
+        ? aiSessions.reduce((sum, s) => sum + s.score, 0) / aiSessions.length 
+        : 0;
+      const avgDBScore = dbAnalytics?.averageScore || 0;
+      const totalAITime = aiSessions.reduce((sum, s) => sum + (s.timeSpent || 0), 0);
+      const totalDBTime = dbAnalytics?.totalTimeSpent || 0;
+      
+      const combinedAnalytics = {
+        totalSessions: totalAISessions + totalDBSessions,
+        averageScore: totalAISessions + totalDBSessions > 0
+          ? ((avgAIScore * totalAISessions + avgDBScore * totalDBSessions) / (totalAISessions + totalDBSessions)).toFixed(1)
+          : 0,
+        totalTimeSpent: totalAITime + totalDBTime,
+        categoryStats: dbAnalytics?.categoryStats || [],
+        recentProgress: dbAnalytics?.recentProgress || [],
+        aiSessionsCount: totalAISessions,
+        dbSessionsCount: totalDBSessions
+      };
 
-      setSessions(historyRes.data.data);
-      setTotalPages(historyRes.data.pagination.pages);
-      setAnalytics(analyticsRes.data.data);
+      setSessions(combinedSessions.slice(0, 10)); // Show first 10
+      setAnalytics(combinedAnalytics);
     } catch (error) {
       console.error('Failed to fetch data:', error);
       console.error('Error response:', error.response?.data);
       console.error('Error status:', error.response?.status);
       
-      // Check if it's an authentication error
-      if (error.response?.status === 401) {
-        console.warn('Authentication failed - token might be expired or invalid');
-        // User not logged in - show empty state
-        setSessions([]);
-        setAnalytics({
-          totalSessions: 0,
-          averageScore: 0,
-          totalTimeSpent: 0,
-          categoryStats: [],
-          recentProgress: []
-        });
-      }
+      // Fallback to just AI sessions
+      const aiSessions = JSON.parse(localStorage.getItem('aiPracticeSessions') || '[]');
+      setSessions(aiSessions.slice(0, 10));
+      
+      const avgScore = aiSessions.length > 0 
+        ? aiSessions.reduce((sum, s) => sum + s.score, 0) / aiSessions.length 
+        : 0;
+      const totalTime = aiSessions.reduce((sum, s) => sum + (s.timeSpent || 0), 0);
+      
+      setAnalytics({
+        totalSessions: aiSessions.length,
+        averageScore: avgScore.toFixed(1),
+        totalTimeSpent: totalTime,
+        categoryStats: [],
+        recentProgress: [],
+        aiSessionsCount: aiSessions.length,
+        dbSessionsCount: 0
+      });
     } finally {
       setLoading(false);
     }
@@ -236,6 +284,11 @@ function PracticeHistory() {
                           {session.question?.question || 'Question'}
                         </h3>
                         <div className="session-item-badges">
+                          {session.isAIGenerated && (
+                            <span className="session-badge ai-generated">
+                              🤖 AI Generated
+                            </span>
+                          )}
                           <span className="session-badge category">
                             {session.category}
                           </span>
