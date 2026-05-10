@@ -1,361 +1,253 @@
-# NexaAura InterviewAI
+# 🎯 NexaAura InterviewAI
 
-**Master Your Next Interview with AI**
+> AI-Powered Interview Preparation Platform
 
-NexaAura InterviewAI is an enterprise-grade AI-powered interview preparation platform built by [NexaAura IT Solutions](https://www.nexaurait.online). Practice with AI-generated questions, get real-time feedback, and track your progress with advanced analytics.
+Enterprise-grade interview preparation platform with AI-powered feedback, mock interviews, and personalized question generation.
 
----
-
-## 🌟 Highlights
-
-- **AI-Powered Feedback** - Get instant, detailed feedback on every answer
-- **Resume-Based Questions** - Questions tailored to your experience and skills  
-- **Voice Interview Mode** - Practice speaking with live waveform visualization
-- **Confidence Metrics** - Track fluency, pace, and speaking confidence
-- **Company-Specific Prep** - Practice for top tech companies
-- **Detailed Analytics** - Comprehensive progress tracking and reports
-- **Multiple Interview Tracks:**
-  - Frontend Developer
-  - Backend Developer
-  - Data Structures & Algorithms
-  - HR & Behavioral
-  - System Design
-  - Employee Introduction
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black)](https://vercel.com)
+[![Backend on Render](https://img.shields.io/badge/Backend-Render-46E3B7)](https://render.com)
+[![MongoDB Atlas](https://img.shields.io/badge/Database-MongoDB%20Atlas-47A248)](https://www.mongodb.com/cloud/atlas)
 
 ---
 
-## 🎯 Built by NexaAura IT Solutions
+## ✨ Features
 
-**Company:** [NexaAura IT Solutions](https://www.nexaurait.online)  
-**Founder:** Prashant Kumar Trivedi  
-**Email:** [nexaaurait@gmail.com](mailto:nexaaurait@gmail.com)  
-**Phone:** [+91 7991 666 248](tel:+917991666248)  
-**WhatsApp:** [Chat with us](https://wa.me/917991666248)  
-**LinkedIn:** [Prashant Kumar Trivedi](https://www.linkedin.com/in/prashant-trivedi-66956b219/)
+### 🎤 **AI Mock Interviewer**
+- Conversational AI interviewer
+- 5 interviewer styles (Friendly, Professional, Technical, Tough, Casual)
+- Real-time follow-up questions
+- Live feedback during interview
+- Comprehensive post-interview report
+- Voice-enabled interviews
+
+### 🤖 **AI Question Generator**
+- **7 Generation Modes:**
+  - Resume-Based Questions
+  - Role-Specific Questions
+  - Company-Specific Questions
+  - Weak Topics Questions
+  - Scenario-Based Questions
+  - Behavioral Questions (STAR format)
+  - Adaptive Questions (performance-based)
+
+### 📚 **Question Bank**
+- 300+ curated interview questions
+- Multiple categories and difficulty levels
+- Practice with instant AI feedback
+- Track your progress
+
+### 🎙️ **Voice AI Assistant**
+- Speech-to-text for answers
+- Text-to-speech for questions
+- Natural conversation flow
+- Hands-free practice mode
+
+### 📊 **Progress Tracking**
+- Detailed practice history
+- Performance analytics
+- Category-wise breakdown
+- Time tracking
+- Score trends
+
+### 📄 **Resume Analysis**
+- Upload and parse resumes
+- Generate personalized questions
+- Skills-based recommendations
 
 ---
 
-## 🚀 Features
-
-### Core Features
-- ✅ Resume upload and intelligent parsing (PDF)
-- ✅ AI-generated interview questions (1-20 questions)
-- ✅ Text and voice answer modes
-- ✅ Real-time answer evaluation with detailed feedback
-- ✅ Live audio waveform visualization
-- ✅ Confidence metrics analysis
-- ✅ Final report with score trends
-- ✅ User authentication (JWT)
-- ✅ Resume persistence for logged-in users
-
-### Advanced Features
-- 🎯 Company-specific interview preparation
-- 📊 Advanced analytics dashboard
-- 📄 Downloadable reports
-- 🎤 Voice tone and pace analysis
-- 💡 Personalized improvement suggestions
-- 🏆 Progress tracking over time
-
----
-
-## 🛠️ Tech Stack
+## 🚀 Tech Stack
 
 ### Frontend
-- **Framework:** React 19
-- **Routing:** React Router 7
+- **Framework:** React 19 + Vite
+- **Routing:** React Router v7
+- **Styling:** Custom CSS + Design System
 - **Animations:** Framer Motion
 - **HTTP Client:** Axios
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS v4
-- **UI Components:** react-loading-skeleton
+- **Deployment:** Vercel
 
 ### Backend
 - **Runtime:** Node.js
-- **Framework:** Express 5
-- **Database:** MongoDB with Mongoose
+- **Framework:** Express.js
+- **Database:** MongoDB Atlas
+- **Authentication:** JWT
+- **AI Service:** Groq API
 - **File Upload:** Multer
 - **PDF Parsing:** pdf-parse
-- **Authentication:** JWT (jsonwebtoken)
-
-### AI Integration
-- **Chat Completion:** xAI/Groq-compatible OpenAI-style API
-- **Speech-to-Text:** Groq Whisper API
-- **Models:** GPT-4, Llama 3.1, Mixtral
+- **Deployment:** Render
 
 ---
 
-## 📁 Project Structure
-
-```
-nexaura-interviewai/
-├── backend/
-│   ├── src/
-│   │   ├── config/          # Database configuration
-│   │   ├── controllers/     # Route controllers
-│   │   ├── middleware/      # Auth, validation, error handling
-│   │   ├── models/          # MongoDB models
-│   │   ├── routes/          # API routes
-│   │   ├── services/        # AI, resume parsing, speech services
-│   │   └── server.js        # Express server
-│   ├── uploads/             # Temporary file uploads
-│   └── package.json
-│
-├── frontend/
-│   ├── public/              # Static assets
-│   ├── src/
-│   │   ├── assets/          # Images, icons
-│   │   ├── components/      # Reusable UI components
-│   │   ├── context/         # React context
-│   │   ├── pages/           # Page components
-│   │   ├── services/        # API services
-│   │   ├── utils/           # Helper functions
-│   │   └── App.jsx          # Main app component
-│   └── package.json
-│
-└── docs/                    # Documentation
-```
-
----
-
-## 🚀 Quick Start
+## 📦 Installation
 
 ### Prerequisites
-
-- Node.js 20+ (recommended)
-- npm or yarn
+- Node.js 18+ 
 - MongoDB (local or Atlas)
-- Groq API Key (for AI features)
+- Groq API key
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/nexaura-interviewai.git
-cd nexaura-interviewai
-```
-
-### 2. Backend Setup
+### Backend Setup
 
 ```bash
 cd backend
 npm install
-
-# Create .env file
 cp .env.example .env
-
 # Edit .env with your credentials
-# - MONGO_URI
-# - JWT_SECRET
-# - GROQ_API_KEY
-
-# Start backend
 npm run dev
 ```
 
-Backend runs on `http://localhost:5000`
-
-### 3. Frontend Setup
+### Frontend Setup
 
 ```bash
 cd frontend
 npm install
-
-# Create .env file (optional)
-# VITE_BACKEND_URL=http://localhost:5000
-
-# Start frontend
+cp .env.example .env
+# Edit .env with backend URL
 npm run dev
 ```
 
-Frontend runs on `http://localhost:5173`
+---
+
+## 🌐 Deployment
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
+
+### Quick Deploy
+
+**Backend (Render):**
+1. Push to GitHub
+2. Connect to Render
+3. Add environment variables
+4. Deploy
+
+**Frontend (Vercel):**
+1. Push to GitHub
+2. Import to Vercel
+3. Add environment variables
+4. Deploy
 
 ---
 
-## 🔧 Environment Variables
+## 🔐 Environment Variables
 
 ### Backend (.env)
-
 ```env
-# Server
-NODE_ENV=development
+NODE_ENV=production
 PORT=5000
-
-# Database
-MONGO_URI=mongodb://localhost:27017/nexaura-interviewai
-
-# Authentication
-JWT_SECRET=your-super-secret-jwt-key
-
-# AI Provider
-AI_PROVIDER=groq
-GROQ_API_KEY=gsk_your-groq-api-key-here
-GROQ_MODEL=llama-3.1-8b-instant
-GROQ_STT_MODEL=whisper-large-v3-turbo
-
-# Security
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
-
-# Company Info
-COMPANY_NAME=NexaAura IT Solutions
-COMPANY_WEBSITE=https://www.nexaurait.online
-COMPANY_EMAIL=nexaaurait@gmail.com
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=your-secret-key
+GROQ_API_KEY=your-groq-key
+ALLOWED_ORIGINS=https://your-frontend.vercel.app
 ```
 
 ### Frontend (.env)
-
 ```env
-# Backend URL
-VITE_BACKEND_URL=http://localhost:5000
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_API_BASE_URL=https://your-backend.onrender.com/api
 ```
 
 ---
 
-## 📡 API Endpoints
-
-### Health & Status
-- `GET /health` - Basic health check
-- `GET /health/detailed` - Detailed system status
-- `GET /ready` - Readiness probe
-- `GET /live` - Liveness probe
+## 📖 API Documentation
 
 ### Authentication
-- `POST /api/auth/signup` - Create account
-- `POST /api/auth/login` - Login
-- `GET /api/auth/me` - Get current user (requires auth)
+- `POST /api/auth/signup` - Register new user
+- `POST /api/auth/login` - Login user
+- `GET /api/auth/me` - Get current user
+
+### Questions
+- `GET /api/questions` - Get all questions
+- `GET /api/questions/random` - Get random question
+- `POST /api/questions/submit` - Submit answer
+- `GET /api/questions/history` - Get practice history
+- `GET /api/questions/analytics` - Get analytics
+
+### AI Question Generator
+- `POST /api/question-generator/generate/resume` - Resume-based
+- `POST /api/question-generator/generate/role` - Role-specific
+- `POST /api/question-generator/generate/company` - Company-specific
+- `POST /api/question-generator/generate/weak-topics` - Weak topics
+- `POST /api/question-generator/generate/scenario` - Scenario-based
+- `POST /api/question-generator/generate/behavioral` - Behavioral
+- `POST /api/question-generator/generate/adaptive` - Adaptive
+
+### Mock Interviewer
+- `POST /api/mock-interviewer/start` - Start interview
+- `POST /api/mock-interviewer/continue` - Continue conversation
+- `POST /api/mock-interviewer/end` - End and get report
+- `GET /api/mock-interviewer/history` - Get interview history
 
 ### Resume
-- `POST /api/resume/upload` - Upload and parse resume
-- `GET /api/resume/me` - Get saved resume (requires auth)
-- `DELETE /api/resume/me` - Delete saved resume (requires auth)
-
-### Interview
-- `POST /api/interview/start` - Start new interview
-- `POST /api/interview/answer` - Submit answer
-- `POST /api/interview/finish` - Finish interview and get report
-- `POST /api/interview/voice-answer` - Submit voice answer
-
-### Testing
-- `POST /api/test/stt` - Speech-to-text transcription
-- `POST /api/test/tts` - Text-to-speech (fallback to browser)
+- `POST /api/resume/upload` - Upload resume
+- `GET /api/resume/me` - Get my resume
+- `DELETE /api/resume/me` - Delete resume
 
 ---
 
 ## 🎨 Features in Detail
 
-### 1. Resume Upload & Parsing
-- Upload PDF resumes
-- AI-powered text extraction
-- Skill and experience identification
-- Resume persistence for logged-in users
+### Mock Interview Flow
+```
+Setup → Interview → Report
+  ↓         ↓          ↓
+Role    Questions   Scores
+Style   Feedback    Analysis
+Level   Follow-ups  Recommendations
+```
 
-### 2. AI Interview Generation
-- Questions based on resume content
-- Domain-specific question sets
-- Configurable question count (1-20)
-- Multiple difficulty levels
+### Question Generator Modes
 
-### 3. Answer Evaluation
-- Real-time AI feedback
-- Score (0-10) with detailed breakdown
-- Coverage analysis
-- Improvement suggestions
-- Strengths and weaknesses identification
-
-### 4. Voice Interview Mode
-- Live audio recording
-- Real-time waveform visualization
-- Voice intensity tracking
-- Speech-to-text transcription
-- Confidence metrics:
-  - Speaking speed (WPM)
-  - Filler word detection
-  - Pause analysis
-  - Fluency scoring
-
-### 5. Analytics & Reports
-- Question-by-question breakdown
-- Score trends over time
-- Weak topic identification
-- Performance comparison
-- Downloadable reports
+1. **Resume-Based**: Analyzes your resume and generates relevant questions
+2. **Role-Specific**: Questions tailored to specific job roles
+3. **Company-Specific**: Questions based on company culture and interview style
+4. **Weak Topics**: Focuses on areas where you need improvement
+5. **Scenario-Based**: Real-world problem-solving scenarios
+6. **Behavioral**: STAR format behavioral questions
+7. **Adaptive**: AI adjusts difficulty based on your performance
 
 ---
 
-## 🔒 Security Features
+## 🤝 Contributing
 
-- Input sanitization (XSS protection)
-- JWT authentication
-- Password hashing (bcrypt)
-- CORS configuration
-- Request validation
-- Rate limiting ready
-- Secure error handling
-
----
-
-## 📊 Performance
-
-- Fast response times (<200ms average)
-- Optimized database queries
-- Efficient AI API usage
-- Lazy loading for frontend
-- Code splitting
-- Image optimization
-
----
-
-## 🤝 Support & Contact
-
-### Get Help
-- 📧 Email: [nexaaurait@gmail.com](mailto:nexaaurait@gmail.com)
-- 📞 Phone: [+91 7991 666 248](tel:+917991666248)
-- 💬 WhatsApp: [Chat Now](https://wa.me/917991666248)
-- 💼 LinkedIn: [Prashant Kumar Trivedi](https://www.linkedin.com/in/prashant-trivedi-66956b219/)
-
-### Company Website
-Visit [NexaAura IT Solutions](https://www.nexaurait.online) for more products and services.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
 ## 📄 License
 
-**MIT License** - Free and Open Source
+MIT License - see LICENSE file for details
 
-Copyright © 2026 NexaAura IT Solutions. 
+---
 
-This software is free to use, modify, and distribute. See [LICENSE](./LICENSE) for details.
+## 👨‍💻 Author
 
-**Built by:** Prashant Kumar Trivedi  
-**Company:** NexaAura IT Solutions  
-**Website:** https://www.nexaurait.online
-
-If you find this useful, please:
-- ⭐ Star the repository
-- 🔗 Link back to [NexaAura IT Solutions](https://www.nexaurait.online)
-- 📧 Share your feedback: nexaaurait@gmail.com
-- 💬 Connect on [WhatsApp](https://wa.me/917991666248)
+**Prashant Kumar Trivedi**
+- Email: nexaaurait@gmail.com
+- Company: NexaAura IT Solutions
+- Website: https://www.nexaurait.online
+- Phone: +91 7991 666 248
 
 ---
 
 ## 🙏 Acknowledgments
 
-- Built with modern web technologies
-- Powered by Groq AI and OpenAI-compatible APIs
-- Designed for enterprise-grade performance
-- Crafted with care by NexaAura IT Solutions
+- Groq for AI API
+- MongoDB Atlas for database
+- Vercel for frontend hosting
+- Render for backend hosting
+- All open-source contributors
 
 ---
 
-## 🚀 What's Next?
+## 📞 Support
 
-### Upcoming Features
-- 📹 Video interview mode
-- 🏢 Company-specific question banks
-- 📊 Advanced analytics dashboard
-- 🎓 Career path guidance
-- 🏆 Achievement system
-- 📱 Mobile app (React Native)
+For support, email nexaaurait@gmail.com or visit our website.
 
 ---
 
-**Ready to master your next interview?** [Get Started Now](https://wa.me/917991666248) 🚀
+## 🎉 Live Demo
+
+**Frontend:** [https://prepai.vercel.app](https://prepai.vercel.app)
+**Backend:** [https://prepai-backend.onrender.com](https://prepai-backend.onrender.com)
+
+---
+
+Made with ❤️ by NexaAura IT Solutions
