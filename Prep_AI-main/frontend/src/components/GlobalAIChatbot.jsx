@@ -187,11 +187,16 @@ function GlobalAIChatbot() {
       <motion.button
         className="ai-chatbot-trigger"
         onClick={() => setIsOpen(!isOpen)}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          setIsOpen(!isOpen);
+        }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        aria-label="Toggle AI Chatbot"
       >
         {isOpen ? (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

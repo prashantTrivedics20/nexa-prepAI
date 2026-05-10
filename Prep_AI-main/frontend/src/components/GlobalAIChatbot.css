@@ -19,6 +19,8 @@
   justify-content: center;
   z-index: var(--z-fixed);
   transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .ai-chatbot-trigger:hover {
