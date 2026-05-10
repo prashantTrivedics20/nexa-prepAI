@@ -311,8 +311,9 @@ function ResumePageNew() {
         throw new Error("Resume data could not be parsed.");
       }
 
-      // Save to state only (database already has it)
+      // Save to state and localStorage (for Interview page)
       setParsedResume(normalized);
+      localStorage.setItem("parsedResume", JSON.stringify(normalized));
 
       // Show success message
       const savedToDB = response.data?.savedForUser;
@@ -342,7 +343,7 @@ function ResumePageNew() {
     setError("");
     setSuccess("");
     setParsedResume(null);
-    // Don't clear from database, just clear local state
+    localStorage.removeItem("parsedResume");
   };
 
   const goToInterviewWithAuthCheck = () => {
