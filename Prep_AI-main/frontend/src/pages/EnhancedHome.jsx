@@ -62,6 +62,201 @@ function EnhancedHome() {
     { value: "24/7", label: "AI Availability" },
   ];
 
+  const detailedFeatures = [
+    {
+      icon: "🎯",
+      title: "AI-Powered Feedback Engine",
+      description: "Get instant, actionable feedback on every answer",
+      details: [
+        "Real-time analysis of your responses using advanced NLP",
+        "Detailed scoring across communication, technical depth, and clarity",
+        "Personalized improvement suggestions for each answer",
+        "Compare your answers with industry-standard responses"
+      ],
+      benefit: "Improve 3x faster with targeted feedback"
+    },
+    {
+      icon: "🎤",
+      title: "Voice Interview Simulation",
+      description: "Practice speaking naturally like a real interview",
+      details: [
+        "Real-time speech-to-text with 98% accuracy",
+        "Natural conversation flow with AI interviewer",
+        "Pronunciation and clarity analysis",
+        "Practice answering under time pressure"
+      ],
+      benefit: "Build confidence for in-person interviews"
+    },
+    {
+      icon: "🤖",
+      title: "Smart Question Generator",
+      description: "Get questions tailored to your profile and goals",
+      details: [
+        "Upload your resume for personalized questions",
+        "Target specific roles, companies, or technologies",
+        "Focus on your weak areas for targeted improvement",
+        "Generate unlimited practice questions on-demand"
+      ],
+      benefit: "Practice exactly what you'll be asked"
+    },
+    {
+      icon: "📊",
+      title: "Advanced Analytics Dashboard",
+      description: "Track your progress with comprehensive metrics",
+      details: [
+        "Performance trends over time with visual charts",
+        "Strength and weakness identification by topic",
+        "Detailed session history with replay capability",
+        "Benchmark against top performers"
+      ],
+      benefit: "Know exactly where you stand"
+    }
+  ];
+
+  const benefits = [
+    {
+      icon: "⚡",
+      title: "Save Time",
+      description: "Practice anytime, anywhere without scheduling mock interviews or waiting for feedback"
+    },
+    {
+      icon: "💰",
+      title: "Cost Effective",
+      description: "Get unlimited practice for free - no expensive coaching or interview prep courses needed"
+    },
+    {
+      icon: "🎓",
+      title: "Learn Faster",
+      description: "AI feedback helps you improve 3x faster than traditional practice methods"
+    },
+    {
+      icon: "🔒",
+      title: "Private & Safe",
+      description: "Practice in a judgment-free environment - make mistakes and learn without pressure"
+    },
+    {
+      icon: "🌍",
+      title: "Always Available",
+      description: "24/7 access to AI interviewer - practice at 2 AM or during your lunch break"
+    },
+    {
+      icon: "📈",
+      title: "Proven Results",
+      description: "95% of our users report improved confidence and better interview performance"
+    }
+  ];
+
+  const howItWorks = [
+    {
+      step: "01",
+      title: "Upload Your Resume",
+      description: "Start by uploading your resume or manually entering your skills and target role. Our AI analyzes your background to create a personalized interview experience.",
+      icon: "📄"
+    },
+    {
+      step: "02",
+      title: "Choose Your Practice Mode",
+      description: "Select from text-based practice, voice interview simulation, or conversational AI mock interviews. Pick questions from our bank or generate custom ones.",
+      icon: "🎯"
+    },
+    {
+      step: "03",
+      title: "Practice & Get Feedback",
+      description: "Answer questions naturally while our AI analyzes your responses in real-time. Get instant feedback on content, structure, and delivery.",
+      icon: "💬"
+    },
+    {
+      step: "04",
+      title: "Review & Improve",
+      description: "Study your performance analytics, review detailed feedback, and track your progress over time. Focus on weak areas and watch your scores improve.",
+      icon: "📊"
+    }
+  ];
+
+  const useCases = [
+    {
+      title: "Job Seekers",
+      description: "Prepare for upcoming interviews with company-specific questions and get feedback on your answers",
+      icon: "💼"
+    },
+    {
+      title: "Career Switchers",
+      description: "Practice answering questions about your career transition and build confidence in explaining your journey",
+      icon: "🔄"
+    },
+    {
+      title: "Fresh Graduates",
+      description: "Learn how to answer behavioral questions and present your projects effectively to potential employers",
+      icon: "🎓"
+    },
+    {
+      title: "Tech Professionals",
+      description: "Practice technical interviews, system design questions, and coding problem explanations",
+      icon: "💻"
+    },
+    {
+      title: "Interview Prep Coaches",
+      description: "Use our platform to train your clients and track their progress with detailed analytics",
+      icon: "👨‍🏫"
+    },
+    {
+      title: "HR Teams",
+      description: "Help candidates prepare better and improve the quality of your interview pipeline",
+      icon: "🏢"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      role: "Software Engineer at Google",
+      image: "👩‍💻",
+      quote: "NexaAura InterviewAI helped me land my dream job at Google. The AI feedback was incredibly detailed and helped me improve my answers significantly.",
+      rating: 5
+    },
+    {
+      name: "Rahul Verma",
+      role: "Product Manager at Microsoft",
+      image: "👨‍💼",
+      quote: "The voice interview feature is a game-changer. It helped me practice speaking clearly and confidently, which made a huge difference in my actual interviews.",
+      rating: 5
+    },
+    {
+      name: "Ananya Patel",
+      role: "Data Scientist at Amazon",
+      image: "👩‍🔬",
+      quote: "I was able to practice 100+ questions in just 2 weeks. The personalized question generator based on my resume was exactly what I needed.",
+      rating: 5
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Is NexaAura InterviewAI really free?",
+      answer: "Yes! We offer a comprehensive free tier that includes access to our question bank, AI feedback, and basic analytics. Premium features like unlimited AI-generated questions and advanced analytics are available in our paid plans."
+    },
+    {
+      question: "How accurate is the AI feedback?",
+      answer: "Our AI is trained on thousands of real interview responses and uses advanced natural language processing. It provides feedback comparable to experienced interview coaches, with 95% user satisfaction rating."
+    },
+    {
+      question: "Can I practice for specific companies?",
+      answer: "Absolutely! You can generate questions tailored to specific companies, roles, and technologies. Our AI understands different interview styles and can simulate company-specific interview formats."
+    },
+    {
+      question: "Does it work for non-technical interviews?",
+      answer: "Yes! While we have extensive technical question coverage, we also support behavioral, situational, and role-specific questions for all industries including marketing, sales, finance, and more."
+    },
+    {
+      question: "How is this different from other interview prep tools?",
+      answer: "Unlike static question banks, we provide real-time AI feedback, conversational mock interviews, voice practice, and personalized question generation based on your resume. It's like having a personal interview coach available 24/7."
+    },
+    {
+      question: "Is my data secure?",
+      answer: "Yes, we take security seriously. All your data is encrypted, and we never share your information with third parties. Your resume and practice sessions are completely private."
+    }
+  ];
+
   return (
     <div className="enhanced-home">
       <Navbar />
@@ -227,6 +422,236 @@ function EnhancedHome() {
               );
               return FeatureCard;
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Features Section */}
+      <section className="detailed-features-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Powerful features that set you apart</h2>
+            <p className="section-description">
+              Advanced AI technology designed to give you a competitive edge
+            </p>
+          </motion.div>
+
+          <div className="detailed-features-list">
+            {detailedFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="detailed-feature-item"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="detailed-feature-icon">{feature.icon}</div>
+                <div className="detailed-feature-content">
+                  <h3 className="detailed-feature-title">{feature.title}</h3>
+                  <p className="detailed-feature-description">{feature.description}</p>
+                  <ul className="detailed-feature-list">
+                    {feature.details.map((detail, idx) => (
+                      <li key={idx}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="detailed-feature-benefit">
+                    <span className="benefit-badge">✨ Benefit:</span>
+                    <span className="benefit-text">{feature.benefit}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">How it works</h2>
+            <p className="section-description">
+              Get started in minutes and see results in days
+            </p>
+          </motion.div>
+
+          <div className="how-it-works-grid">
+            {howItWorks.map((step, index) => (
+              <motion.div
+                key={index}
+                className="how-it-works-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+              >
+                <div className="step-number">{step.step}</div>
+                <div className="step-icon">{step.icon}</div>
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-description">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="benefits-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Why choose NexaAura InterviewAI?</h2>
+            <p className="section-description">
+              The smartest way to prepare for your next interview
+            </p>
+          </motion.div>
+
+          <div className="benefits-grid">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                className="benefit-card"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="benefit-icon">{benefit.icon}</div>
+                <h3 className="benefit-title">{benefit.title}</h3>
+                <p className="benefit-description">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases Section */}
+      <section className="use-cases-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Perfect for everyone</h2>
+            <p className="section-description">
+              Whether you're a student, professional, or career switcher
+            </p>
+          </motion.div>
+
+          <div className="use-cases-grid">
+            {useCases.map((useCase, index) => (
+              <motion.div
+                key={index}
+                className="use-case-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="use-case-icon">{useCase.icon}</div>
+                <h3 className="use-case-title">{useCase.title}</h3>
+                <p className="use-case-description">{useCase.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Loved by professionals worldwide</h2>
+            <p className="section-description">
+              See what our users have to say about their success
+            </p>
+          </motion.div>
+
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="testimonial-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+              >
+                <div className="testimonial-rating">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="star">⭐</span>
+                  ))}
+                </div>
+                <p className="testimonial-quote">"{testimonial.quote}"</p>
+                <div className="testimonial-author">
+                  <div className="author-image">{testimonial.image}</div>
+                  <div className="author-info">
+                    <div className="author-name">{testimonial.name}</div>
+                    <div className="author-role">{testimonial.role}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="faq-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Frequently asked questions</h2>
+            <p className="section-description">
+              Everything you need to know about NexaAura InterviewAI
+            </p>
+          </motion.div>
+
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                className="faq-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <h3 className="faq-question">{faq.question}</h3>
+                <p className="faq-answer">{faq.answer}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
