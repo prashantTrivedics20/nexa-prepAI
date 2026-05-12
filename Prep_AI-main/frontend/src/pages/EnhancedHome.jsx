@@ -10,45 +10,93 @@ function EnhancedHome() {
 
   const features = [
     {
-      icon: "🎯",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      ),
       title: "AI-Powered Feedback",
       description: "Get instant, detailed feedback on every answer with advanced AI analysis",
     },
     {
-      icon: "🎤",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="23"></line>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+      ),
       title: "Voice Interview Mode",
       description: "Practice speaking naturally with real-time voice recognition",
     },
     {
-      icon: "🤖",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      ),
       title: "AI Question Generator",
       description: "Generate personalized questions based on your resume, role, or weak topics",
       link: "/ai-generator",
     },
     {
-      icon: "👔",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      ),
       title: "AI Mock Interviewer",
       description: "Practice with a conversational AI interviewer that asks follow-up questions",
       link: "/mock-interviewer",
     },
     {
-      icon: "📊",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+      ),
       title: "Progress Analytics",
       description: "Track your improvement with comprehensive performance metrics",
     },
     {
-      icon: "📝",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      ),
       title: "Question Bank",
       description: "Access 300+ curated interview questions across multiple domains",
       link: "/questions",
     },
     {
-      icon: "💬",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <line x1="9" y1="10" x2="15" y2="10"></line>
+          <line x1="12" y1="7" x2="12" y2="13"></line>
+        </svg>
+      ),
       title: "AI Chat Assistant",
       description: "Get help structuring answers with our intelligent chatbot",
     },
     {
-      icon: "📄",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+      ),
       title: "Resume Analysis",
       description: "Upload your resume for personalized question generation",
       link: "/resume",
@@ -64,50 +112,73 @@ function EnhancedHome() {
 
   const detailedFeatures = [
     {
-      icon: "🎯",
-      title: "AI-Powered Feedback Engine",
-      description: "Get instant, actionable feedback on every answer",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+      ),
+      title: "Real-time AI Analysis",
+      description: "Advanced natural language processing evaluates your responses instantly",
       details: [
-        "Real-time analysis of your responses using advanced NLP",
-        "Detailed scoring across communication, technical depth, and clarity",
-        "Personalized improvement suggestions for each answer",
-        "Compare your answers with industry-standard responses"
+        "Analyzes communication clarity and structure",
+        "Evaluates technical depth and accuracy",
+        "Provides specific improvement suggestions",
+        "Compares against industry best practices"
       ],
       benefit: "Improve 3x faster with targeted feedback"
     },
     {
-      icon: "🎤",
-      title: "Voice Interview Simulation",
-      description: "Practice speaking naturally like a real interview",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      ),
+      title: "Practice Anytime, Anywhere",
+      description: "No scheduling needed - practice whenever you're ready",
       details: [
-        "Real-time speech-to-text with 98% accuracy",
-        "Natural conversation flow with AI interviewer",
-        "Pronunciation and clarity analysis",
-        "Practice answering under time pressure"
+        "24/7 availability with instant AI responses",
+        "Works on desktop, tablet, and mobile",
+        "No waiting for human reviewers",
+        "Practice at your own pace"
       ],
-      benefit: "Build confidence for in-person interviews"
+      benefit: "Build confidence on your schedule"
     },
     {
-      icon: "🤖",
-      title: "Smart Question Generator",
-      description: "Get questions tailored to your profile and goals",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <line x1="20" y1="8" x2="20" y2="14"></line>
+          <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+      ),
+      title: "Personalized Learning Path",
+      description: "AI adapts to your experience level and goals",
       details: [
-        "Upload your resume for personalized questions",
-        "Target specific roles, companies, or technologies",
-        "Focus on your weak areas for targeted improvement",
-        "Generate unlimited practice questions on-demand"
+        "Resume-based question generation",
+        "Role-specific interview scenarios",
+        "Difficulty adjusts to your skill level",
+        "Focus on your weak areas automatically"
       ],
       benefit: "Practice exactly what you'll be asked"
     },
     {
-      icon: "📊",
-      title: "Advanced Analytics Dashboard",
-      description: "Track your progress with comprehensive metrics",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 3v18h18"></path>
+          <path d="M18 17V9"></path>
+          <path d="M13 17V5"></path>
+          <path d="M8 17v-3"></path>
+        </svg>
+      ),
+      title: "Track Your Progress",
+      description: "Comprehensive analytics show your improvement over time",
       details: [
-        "Performance trends over time with visual charts",
-        "Strength and weakness identification by topic",
-        "Detailed session history with replay capability",
-        "Benchmark against top performers"
+        "Performance trends with visual charts",
+        "Strength and weakness breakdown",
+        "Session history with detailed reports",
+        "Benchmark against successful candidates"
       ],
       benefit: "Know exactly where you stand"
     }
@@ -115,34 +186,62 @@ function EnhancedHome() {
 
   const benefits = [
     {
-      icon: "⚡",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      ),
       title: "Save Time",
-      description: "Practice anytime, anywhere without scheduling mock interviews or waiting for feedback"
+      description: "Practice anytime without scheduling mock interviews or waiting for feedback"
     },
     {
-      icon: "💰",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="12" y1="1" x2="12" y2="23"></line>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+      ),
       title: "Cost Effective",
-      description: "Get unlimited practice for free - no expensive coaching or interview prep courses needed"
+      description: "Get unlimited practice for free - no expensive coaching needed"
     },
     {
-      icon: "🎓",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+      ),
       title: "Learn Faster",
-      description: "AI feedback helps you improve 3x faster than traditional practice methods"
+      description: "AI feedback helps you improve 3x faster than traditional methods"
     },
     {
-      icon: "🔒",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      ),
       title: "Private & Safe",
-      description: "Practice in a judgment-free environment - make mistakes and learn without pressure"
+      description: "Practice in a judgment-free environment without pressure"
     },
     {
-      icon: "🌍",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      ),
       title: "Always Available",
-      description: "24/7 access to AI interviewer - practice at 2 AM or during your lunch break"
+      description: "24/7 access to AI interviewer - practice whenever you want"
     },
     {
-      icon: "📈",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+      ),
       title: "Proven Results",
-      description: "95% of our users report improved confidence and better interview performance"
+      description: "95% of users report improved confidence and performance"
     }
   ];
 
@@ -150,59 +249,114 @@ function EnhancedHome() {
     {
       step: "01",
       title: "Upload Your Resume",
-      description: "Start by uploading your resume or manually entering your skills and target role. Our AI analyzes your background to create a personalized interview experience.",
-      icon: "📄"
+      description: "Start by uploading your resume or entering your skills and target role. Our AI analyzes your background to create a personalized experience.",
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+      )
     },
     {
       step: "02",
       title: "Choose Your Practice Mode",
-      description: "Select from text-based practice, voice interview simulation, or conversational AI mock interviews. Pick questions from our bank or generate custom ones.",
-      icon: "🎯"
+      description: "Select from text-based practice, voice interviews, or conversational AI mock interviews. Pick from our question bank or generate custom ones.",
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="10 8 16 12 10 16 10 8"></polyline>
+        </svg>
+      )
     },
     {
       step: "03",
       title: "Practice & Get Feedback",
       description: "Answer questions naturally while our AI analyzes your responses in real-time. Get instant feedback on content, structure, and delivery.",
-      icon: "💬"
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      )
     },
     {
       step: "04",
       title: "Review & Improve",
-      description: "Study your performance analytics, review detailed feedback, and track your progress over time. Focus on weak areas and watch your scores improve.",
-      icon: "📊"
+      description: "Study your performance analytics, review detailed feedback, and track progress over time. Focus on weak areas and watch your scores improve.",
+      icon: (
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 3v18h18"></path>
+          <path d="M18 17V9"></path>
+          <path d="M13 17V5"></path>
+          <path d="M8 17v-3"></path>
+        </svg>
+      )
     }
   ];
 
   const useCases = [
     {
       title: "Job Seekers",
-      description: "Prepare for upcoming interviews with company-specific questions and get feedback on your answers",
-      icon: "💼"
+      description: "Prepare for upcoming interviews with company-specific questions and feedback",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      )
     },
     {
       title: "Career Switchers",
-      description: "Practice answering questions about your career transition and build confidence in explaining your journey",
-      icon: "🔄"
+      description: "Practice explaining your career transition and build confidence in your story",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="17 1 21 5 17 9"></polyline>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+          <polyline points="7 23 3 19 7 15"></polyline>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+        </svg>
+      )
     },
     {
       title: "Fresh Graduates",
-      description: "Learn how to answer behavioral questions and present your projects effectively to potential employers",
-      icon: "🎓"
+      description: "Learn how to answer behavioral questions and present your projects effectively",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      )
     },
     {
       title: "Tech Professionals",
-      description: "Practice technical interviews, system design questions, and coding problem explanations",
-      icon: "💻"
+      description: "Practice technical interviews, system design, and coding explanations",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      )
     },
     {
-      title: "Interview Prep Coaches",
-      description: "Use our platform to train your clients and track their progress with detailed analytics",
-      icon: "👨‍🏫"
+      title: "Interview Coaches",
+      description: "Use our platform to train clients and track their progress with analytics",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      )
     },
     {
       title: "HR Teams",
-      description: "Help candidates prepare better and improve the quality of your interview pipeline",
-      icon: "🏢"
+      description: "Help candidates prepare better and improve your interview pipeline quality",
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      )
     }
   ];
 
@@ -210,21 +364,21 @@ function EnhancedHome() {
     {
       name: "Priya Sharma",
       role: "Software Engineer at Google",
-      image: "👩‍💻",
+      initials: "PS",
       quote: "NexaAura InterviewAI helped me land my dream job at Google. The AI feedback was incredibly detailed and helped me improve my answers significantly.",
       rating: 5
     },
     {
       name: "Rahul Verma",
       role: "Product Manager at Microsoft",
-      image: "👨‍💼",
+      initials: "RV",
       quote: "The voice interview feature is a game-changer. It helped me practice speaking clearly and confidently, which made a huge difference in my actual interviews.",
       rating: 5
     },
     {
       name: "Ananya Patel",
       role: "Data Scientist at Amazon",
-      image: "👩‍🔬",
+      initials: "AP",
       quote: "I was able to practice 100+ questions in just 2 weeks. The personalized question generator based on my resume was exactly what I needed.",
       rating: 5
     }
@@ -328,17 +482,27 @@ function EnhancedHome() {
               
               {/* Floating elements */}
               <div className="floating-element floating-element-1">
-                <div className="element-icon">💼</div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <div className="element-label">Interview Ready</div>
               </div>
               
               <div className="floating-element floating-element-2">
-                <div className="element-icon">🎯</div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 16v-4"></path>
+                  <path d="M12 8h.01"></path>
+                </svg>
                 <div className="element-label">AI Powered</div>
               </div>
               
               <div className="floating-element floating-element-3">
-                <div className="element-icon">📊</div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
                 <div className="element-label">Track Progress</div>
               </div>
               
@@ -354,7 +518,7 @@ function EnhancedHome() {
                 </div>
                 <div className="mockup-content">
                   <div className="mockup-message">
-                    <div className="message-avatar">🤖</div>
+                    <div className="message-avatar">AI</div>
                     <div className="message-text">
                       <div className="message-label">AI Interviewer</div>
                       <div className="message-bubble">Tell me about your experience with React...</div>
@@ -365,7 +529,7 @@ function EnhancedHome() {
                       <div className="message-label">You</div>
                       <div className="message-bubble">I have 3 years of experience building...</div>
                     </div>
-                    <div className="message-avatar">👤</div>
+                    <div className="message-avatar">You</div>
                   </div>
                   <div className="mockup-typing">
                     <span></span>
@@ -408,7 +572,7 @@ function EnhancedHome() {
                   onClick={feature.link ? () => navigate(feature.link) : undefined}
                   style={feature.link ? { cursor: 'pointer' } : {}}
                 >
-                  <div className="feature-icon">{feature.icon}</div>
+                  <div className="feature-icon-svg">{feature.icon}</div>
                   <h3 className="feature-title">{feature.title}</h3>
                   <p className="feature-description">{feature.description}</p>
                   {feature.link && (
@@ -451,7 +615,7 @@ function EnhancedHome() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="detailed-feature-icon">{feature.icon}</div>
+                <div className="detailed-feature-icon-svg">{feature.icon}</div>
                 <div className="detailed-feature-content">
                   <h3 className="detailed-feature-title">{feature.title}</h3>
                   <p className="detailed-feature-description">{feature.description}</p>
@@ -466,7 +630,9 @@ function EnhancedHome() {
                     ))}
                   </ul>
                   <div className="detailed-feature-benefit">
-                    <span className="benefit-badge">✨ Benefit:</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
                     <span className="benefit-text">{feature.benefit}</span>
                   </div>
                 </div>
@@ -502,7 +668,7 @@ function EnhancedHome() {
                 transition={{ delay: index * 0.15 }}
               >
                 <div className="step-number">{step.step}</div>
-                <div className="step-icon">{step.icon}</div>
+                <div className="step-icon-svg">{step.icon}</div>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-description">{step.description}</p>
               </motion.div>
@@ -536,7 +702,7 @@ function EnhancedHome() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="benefit-icon">{benefit.icon}</div>
+                <div className="benefit-icon-svg">{benefit.icon}</div>
                 <h3 className="benefit-title">{benefit.title}</h3>
                 <p className="benefit-description">{benefit.description}</p>
               </motion.div>
@@ -570,7 +736,7 @@ function EnhancedHome() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="use-case-icon">{useCase.icon}</div>
+                <div className="use-case-icon-svg">{useCase.icon}</div>
                 <h3 className="use-case-title">{useCase.title}</h3>
                 <p className="use-case-description">{useCase.description}</p>
               </motion.div>
@@ -606,12 +772,14 @@ function EnhancedHome() {
               >
                 <div className="testimonial-rating">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="star">⭐</span>
+                    <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
                   ))}
                 </div>
                 <p className="testimonial-quote">"{testimonial.quote}"</p>
                 <div className="testimonial-author">
-                  <div className="author-image">{testimonial.image}</div>
+                  <div className="author-avatar">{testimonial.initials}</div>
                   <div className="author-info">
                     <div className="author-name">{testimonial.name}</div>
                     <div className="author-role">{testimonial.role}</div>

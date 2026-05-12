@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import API from '../services/api';
 import { isAuthenticated } from '../services/auth';
@@ -38,10 +38,11 @@ function AIQuestionGenerator() {
   const [adaptiveCount, setAdaptiveCount] = useState(5);
 
   // Check authentication
-  if (!isAuthenticated()) {
-    navigate('/signup');
-    return null;
-  }
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate('/signup');
+    }
+  }, [navigate]);
 
   const generateQuestions = async (type) => {
     setLoading(true);

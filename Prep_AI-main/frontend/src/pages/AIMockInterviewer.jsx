@@ -39,10 +39,11 @@ function AIMockInterviewer() {
   const synthRef = useRef(window.speechSynthesis);
 
   // Check authentication
-  if (!isAuthenticated()) {
-    navigate('/signup');
-    return null;
-  }
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate('/signup');
+    }
+  }, [navigate]);
 
   // Initialize speech recognition
   useEffect(() => {
