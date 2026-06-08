@@ -138,23 +138,34 @@ function ResumePageNew() {
   useEffect(() => {
     const fetchResumeFromDB = async () => {
       if (!isLoggedIn) {
+        console.log('User not logged in, skipping resume fetch');
         setLoadingResume(false);
         return;
       }
       
       try {
         setLoadingResume(true);
+        console.log('Fetching resume from database...');
         const response = await API.get('/resume/me');
+        console.log('Resume fetch response:', response.data);
+        
         if (response.data?.parsedData) {
           const normalized = parseResumePayload(response.data.parsedData);
           if (normalized) {
+            console.log('Resume loaded successfully from database');
             setParsedResume(normalized);
           }
         }
       } catch (error) {
         // If no resume found in DB, that's okay - user hasn't uploaded yet
-        if (error.response?.status !== 404) {
+        if (error.response?.status === 404) {
+          console.log('No resume found in database (404) - user needs to upload');
+        } else if (error.response?.status === 401) {
+          console.error('Authentication error (401) - please login again');
+          setError('Your session has expired. Please login again.');
+        } else {
           console.error('Failed to fetch resume from database:', error);
+          setError('Failed to load your resume. Please try refreshing the page.');
         }
       } finally {
         setLoadingResume(false);
